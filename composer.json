@@ -9,7 +9,8 @@
     "crudch/cache": "^1.0",
     "crudch/routing": "^1.0",
     "crudch/container": "^1.0",
-    "crudch/http": "^1.0"
+    "crudch/http": "^1.0",
+    "crudch/multiexception": "^1.0"
   },
   "require-dev": {},
   "repositories": [
@@ -36,6 +37,10 @@
     {
       "type": "git",
       "url": "https://github.com/crudch/http"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/crudch/multiexception"
     }
   ],
   "autoload": {

@@ -13,7 +13,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 
 try {
-    var_dump(\Crudch\Container::get(\Crudch\Container::class));
+    var_dump(\Crudch\Container::get(\Crudch\Request::class)->input());
 } catch (\Throwable $e) {
     var_dump($e->getPrevious());
 }
