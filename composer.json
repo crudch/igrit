@@ -1,0 +1,54 @@
+{
+  "name": "crudch/wardex",
+  "license": "MIT",
+  "description": "Application Wardex",
+  "require": {
+    "php": "^7.2",
+    "crudch/date": "^1.0",
+    "crudch/view": "^1.0",
+    "crudch/cache": "^1.0",
+    "crudch/routing": "^1.0",
+    "crudch/container": "^1.0",
+    "crudch/http": "^1.0"
+  },
+  "require-dev": {},
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/crudch/date"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/crudch/view"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/crudch/cache"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/crudch/routing"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/crudch/container"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/crudch/http"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    },
+    "files": []
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
