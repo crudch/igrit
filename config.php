@@ -40,17 +40,7 @@ return [
     /**
      * Кеш
      */
-    'cache' => [
-        'driver' => 'Driver class',
-        'path'   => __DIR__ . '/cache'
-    ],
-
-    /**
-     * Шаблоны
-     */
-    'view' => [
-        'path' => __DIR__ . '/template'
-    ],
+    'cache_driver' => \Crudch\Cache\Drivers\FileDriver::class,
 
     /**
      * Основной email

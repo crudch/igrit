@@ -4,7 +4,8 @@
   "description": "Application Wardex",
   "require": {
     "php": "^7.2",
-    "crudch/framework": "dev-master"
+    "crudch/framework": "dev-master",
+    "ext-pdo": "*"
   },
   "require-dev": {},
   "repositories": [
