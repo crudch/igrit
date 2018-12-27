@@ -7,7 +7,7 @@ use Crudch\Http\FormRequest;
 class TestRequest extends FormRequest
 {
     protected static $messages = [
-        'name.email' => 'Fuck you Spilberg'
+        'foo.email' => 'Test for Foo'
     ];
     /**
      * @return array
@@ -15,8 +15,8 @@ class TestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|email',
-            'foo' => 'required|max:5'
+            'foo' => 'required|email',
+            'bar' => 'required|max:5'
         ];
     }
 }
