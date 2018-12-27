@@ -1,19 +1,34 @@
 <?php
 
+use Crudch\Http\Request;
+use Crudch\Http\Exceptions\MultiException;
+use Crudch\Container\Container;
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 
-\Crudch\Container::set('config', function () {
+Container::set('config', function () {
     return require dirname(__DIR__) . '/config.php';
 });
 
-\Crudch\Container::set(\Crudch\Request::class, function () {
-    return new \Crudch\Request();
+Container::set(Request::class, function () {
+    return new Request();
 });
 
 
 try {
-    var_dump(\Crudch\Container::get(\Crudch\Request::class)->input());
+    /** @var \App\Requests\TestRequest $request */
+    $request = Container::get(\App\Requests\TestRequest::class);
+    $request->setAttributes(['a' => '1', 'b' => 3]);
+
+    var_dump(
+        Container::get(Request::class)->all()
+    );
 } catch (\Throwable $e) {
-    var_dump($e->getPrevious());
+    if ($e instanceof MultiException) {
+       var_dump($e->toArray());
+       die;
+    }
+
+    var_dump($e);
 }

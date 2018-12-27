@@ -4,43 +4,13 @@
   "description": "Application Wardex",
   "require": {
     "php": "^7.2",
-    "crudch/date": "^1.0",
-    "crudch/view": "^1.0",
-    "crudch/cache": "^1.0",
-    "crudch/routing": "^1.0",
-    "crudch/container": "^1.0",
-    "crudch/http": "^1.0",
-    "crudch/multiexception": "^1.0"
+    "crudch/framework": "dev-master"
   },
   "require-dev": {},
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/crudch/date"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/crudch/view"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/crudch/cache"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/crudch/routing"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/crudch/container"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/crudch/http"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/crudch/multiexception"
+      "url": "https://github.com/crudch/framework"
     }
   ],
   "autoload": {
