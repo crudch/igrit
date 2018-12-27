@@ -7,14 +7,21 @@ use Crudch\Container\Container;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 
-Container::set('config', function () {
-    return require dirname(__DIR__) . '/config.php';
+Container::set(\Crudch\Config\Config::class, function () {
+    return new Crudch\Config\Config(dirname(__DIR__) . '/config.php');
 });
 
 Container::set(Request::class, function () {
     return new Request();
 });
 
+try{
+   var_dump(
+       config('db')
+   );
+}catch (\Throwable $e) {
+    var_dump($e);die;
+}
 
 try {
     /** @var \App\Requests\TestRequest $request */
