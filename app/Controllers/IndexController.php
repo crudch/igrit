@@ -2,7 +2,12 @@
 
 namespace App\Controllers;
 
-class IndexController
-{
+use Crudch\Foundation\Controller;
 
+class IndexController extends Controller
+{
+    public function index()
+    {
+        return view('index', ['username' => 'Vasya Pupkin']);
+    }
 }

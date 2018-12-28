@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \Crudch\View\View $this
+ * @var string $username
  */
 ?>
 
@@ -12,7 +13,7 @@
 <?php $this->start('style'); ?><?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
-    <h1>Привет {username}</h1>
+    <h1>Привет <?php echo e($username); ?></h1>
 <?php $this->stop(); ?>
 
 <?php $this->start('script'); ?><?php $this->stop(); ?>
