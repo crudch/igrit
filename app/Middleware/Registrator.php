@@ -13,7 +13,7 @@ class Registrator
      * @var array
      */
     public static $general_middleware = [
-        //ProfilerMiddleware::class,
+        ProfilerMiddleware::class,
     ];
 
     /**
