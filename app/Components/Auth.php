@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Component;
+
+use App\Models\Users\User;
+use App\Models\Users\AuthUser;
+
+/**
+ * Class Auth
+ *
+ * @package App\Component
+ */
+class Auth
+{
+    /**
+     * @var AuthUser
+     */
+    protected $user;
+
+    public function __construct()
+    {
+        $this->init();
+    }
+
+    /**
+     * @return AuthUser
+     */
+    public function getAuthUser()
+    {
+        return $this->user;
+    }
+
+    protected function init()
+    {
+        $id = self::identifier();
+
+        if (!empty($_SESSION[$id]) && $user = AuthUser::findBySessionId($_SESSION[$id])) {
+            return $this->user = $user;
+        }
+
+        if (!empty($_COOKIE['token']) && $user = AuthUser::findByToken($_COOKIE['token'])) {
+            $_SESSION[$id] = $user->id;
+
+            return $this->user = $user;
+        }
+
+        return $this->user = new AuthUser();
+    }
+
+
+    public static function attempt(User $user, $remember = null)
+    {
+        $_SESSION[self::identifier()] = $user->id;
+
+        return $remember &&
+            setcookie('token', $user->token, 0x7FFFFFFF, '/', '', config('secure'), true);
+    }
+
+    public static function logout()
+    {
+        unset($_SESSION[self::identifier()]);
+
+        //session_destroy();
+
+        $time = time() - 3600;
+
+        foreach (['token'] as $value) {
+            setcookie($value, '', $time, '/', '');
+        }
+    }
+
+    /**
+     * Сгенерировать идентификатор
+     *
+     * @return string
+     */
+    public static function identifier(): string
+    {
+        return sprintf('user_%s', md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']));
+    }
+}
