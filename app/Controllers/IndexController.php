@@ -8,6 +8,9 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('index', ['username' => 'Jane Doe']);
+        var_dump(
+            password_hash('123', PASSWORD_DEFAULT),
+            token('test')
+        );
     }
 }
