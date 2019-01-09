@@ -7,8 +7,8 @@
 
 <?php $this->extend('layout/layout'); ?>
 
-<?php $this->start('title'); ?>Здесь такой титле<?php $this->stop(); ?>
-<?php $this->start('description'); ?>Здесь такое описание<?php $this->stop(); ?>
+<?php $this->start('title'); ?>Title<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Description<?php $this->stop(); ?>
 
 <?php $this->start('style'); ?><?php $this->stop(); ?>
 
