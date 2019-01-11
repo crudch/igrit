@@ -106,8 +106,8 @@
               method: 'get',
               url: url
             }).then((json) => {
-                vm.$data.book.title = json.data[`ISBN:${this.formData.bookisbn}`].title;
-                vm.$data.book.url = json.data[`ISBN:${this.formData.bookisbn}`]['cover']['large'];
+                vm.book.title = json.data[`ISBN:${this.formData.bookisbn}`].title;
+                vm.book.url = json.data[`ISBN:${this.formData.bookisbn}`]['cover']['large'];
             }).catch((err) => {
               console.log(err);
             });
