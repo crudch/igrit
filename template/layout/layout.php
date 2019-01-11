@@ -15,6 +15,7 @@
 <?php echo $this->renderBlock('content'); ?>
 
 <script src="/js/app.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
 <?php echo $this->renderBlock('script'); ?>
 </body>
 </html>

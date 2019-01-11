@@ -1,3 +1,6 @@
-h1{
-  color: green;
+//@import "~normalize.css";
+@import '~bootstrap/scss/bootstrap';
+
+[v-cloak] {
+  display: none;
 }
