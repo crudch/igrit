@@ -59,7 +59,7 @@
                 <div>
                     <p>My favorite book is <strong>{{book.title}}</strong></p>
                     <p>
-                        <img :src="book.url" alt="{{book.title}}">
+                        <img :src="book.url" :alt="book.title">
                     </p>
                 </div>
                 <ul class="list-group" v-if="myTech.length > 0 && myTech[0].length">
