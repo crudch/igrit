@@ -12,4 +12,9 @@ class IndexController extends Controller
             'username' => 'Vasya',
         ]);
     }
+
+    public function comp1()
+    {
+        return view('Vue/comp-1');
+    }
 }
