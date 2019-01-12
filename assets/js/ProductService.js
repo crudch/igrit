@@ -26,9 +26,13 @@ export default new Vue({
     ]
   },
   methods: {
-    show(id) {
+    show (id) {
       const product = this.products.find(n => n.id === +id);
       this.$emit('show', product);
+    },
+    add (title, body) {
+      const id = this.products[this.products.length - 1].id + 1;
+      this.products.push({id, title, body});
     }
   }
 });

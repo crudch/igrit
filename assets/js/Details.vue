@@ -1,7 +1,11 @@
 <template>
-    <div class="jumbotron" v-show="Object.keys(product).length !== 0">
-        <h1 class="display-4">{{ product.title }}</h1>
-        <p class="lead">{{ product.body}}</p>
+    <div class="card">
+        <div class="card-header">
+            {{ product.title }}
+        </div>
+        <div class="card-body">
+            <p>{{ product.body}}</p>
+        </div>
     </div>
 </template>
 
