@@ -9,11 +9,14 @@
 </template>
 
 <script>
+  import ProductService from './ProductService';
+
   export default {
     props: ['product', 'index'],
     methods: {
       show () {
-        this.$emit('show', this.product.id);
+        //this.$emit('show', this.product.id);
+        ProductService.show(this.product.id);
       }
     }
   };

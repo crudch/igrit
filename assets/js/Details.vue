@@ -6,7 +6,16 @@
 </template>
 
 <script>
+  import ProductService from './ProductService';
+
   export default {
-    props: ['product']
+    data () {
+      return {
+        product: {}
+      };
+    },
+    created () {
+      ProductService.$on('show', (o) => this.product = o);
+    }
   };
 </script>

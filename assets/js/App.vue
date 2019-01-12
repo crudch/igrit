@@ -2,10 +2,10 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm">
-                <product-list @show="show"></product-list>
+                <product-list></product-list>
             </div>
             <div class="col-sm">
-                <details-view :product="select"></details-view>
+                <details-view></details-view>
             </div>
         </div>
     </div>
@@ -16,19 +16,9 @@
   import DetailsView from './Details';
 
   export default {
-    data () {
-      return {
-        select: {}
-      };
-    },
     components: {
       ProductList,
       DetailsView
     },
-    methods: {
-      show (product) {
-        this.select = product;
-      }
-    }
   };
 </script>
