@@ -4,3 +4,20 @@
 [v-cloak] {
   display: none;
 }
+
+html {
+  overflow-y: scroll;
+}
+
+.crutch-link {
+  color: #1b1e21;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:visited,
+  &:active {
+    text-decoration: inherit;
+    color: lighten(#1b1e21, 30%);
+  }
+}

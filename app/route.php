@@ -3,4 +3,7 @@
  * @var \Crudch\Routing\Router $route
  */
 
-$route->get('/', 'IndexController@index');
+foreach (['/', '/{id:\d+}', '/create', '/{id:\d+}/edit'] as $url) {
+    $route->get($url, 'IndexController@index');
+}
+

@@ -1,10 +1,14 @@
 <template>
-    <div class="card" v-fuck>
+    <div class="card">
         <div class="card-header">
             {{ product.title | toUppercase }}
         </div>
         <div class="card-body">
             <p>{{ toLowerCaseBody}}</p>
+        </div>
+        <div class="card-footer text-muted text-right">
+            <router-link class="btn btn-outline-primary" :to="{name : 'update'}">Редактировать</router-link>
+            <button class="btn btn-outline-danger" @click.prevent="deleteData">Удалить</button>
         </div>
     </div>
 </template>
@@ -19,19 +23,27 @@
       };
     },
     created () {
-      ProductService.$on('show', (o) => this.product = o);
+      // загружаем данные, когда представление создано
+      // и данные реактивно отслеживаются
+      this.fetchData();
+    },
+    watch: {
+      // при изменениях маршрута запрашиваем данные снова
+      '$route': 'fetchData'
+    },
+    methods: {
+      fetchData () {
+        this.product = ProductService.find(this.$route.params['id']);
+      },
+      deleteData () {
+        ProductService.delete(this.$route.params['id']);
+        this.$router.replace({name: 'home'});
+      }
     },
     computed: {
       toLowerCaseBody () {
         if (this.product.body !== undefined) {
           return this.product.body.toLowerCase();
-        }
-      }
-    },
-    directives: {
-      'fuck': {
-        bind (el, binding, vnode) {
-          setTimeout(() => el.style.boxShadow = '5px 7px 5px rgba(0,0,0,0.3)', 1000);
         }
       }
     },

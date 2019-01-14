@@ -1,49 +1,27 @@
 <template>
-    <div class="container mt-5">
-        <my-header>
-            <h1 class="text-center">SLOT</h1>
-            <h2 slot="subtitle">Sub Title</h2>
-        </my-header>
-        <div class="row">
-            <div class="col-sm">
-                <product-list></product-list>
+    <div class="container">
+        <nav class="navbar navbar-expand navbar-dark bg-dark mb-2">
+            <router-link class="navbar-brand" :to="{name : 'home'}">Вся куча</router-link>
+
+            <div class="collapse navbar-collapse">
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <router-link class="nav-link" :to="{name : 'create'}">Добавить</router-link>
+                    </li>
+                </ul>
+
             </div>
-            <div class="col-sm">
-                <div class="text-center mb-3">
-                    <button class="btn btn-light" @click="mode = !mode">{{componentName}}</button>
-                </div>
-                <keep-alive>
-                    <component :is="componentName"></component>
-                </keep-alive>
-            </div>
-        </div>
+        </nav>
+
+        <router-view></router-view>
+
     </div>
 </template>
 
 <script>
-  import myForm from './Form';
-  import myHeader from './Header';
-  import DetailsView from './Details';
-  import ProductList from './ProductList';
 
   export default {
-    components: {
-      myForm,
-      myHeader,
-      ProductList,
-      DetailsView
-    },
 
-    data() {
-      return {
-        mode: 1
-      }
-    },
-
-    computed: {
-      componentName() {
-        return this.mode ? 'DetailsView' : 'myForm';
-      }
-    }
   };
 </script>
