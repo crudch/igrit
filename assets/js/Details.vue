@@ -1,10 +1,10 @@
 <template>
     <div class="card" v-fuck>
         <div class="card-header">
-            {{ product.title | reverse }}
+            {{ product.title | toUppercase }}
         </div>
         <div class="card-body">
-            <p>{{ product.body}}</p>
+            <p>{{ toLowerCaseBody}}</p>
         </div>
     </div>
 </template>
@@ -21,6 +21,13 @@
     created () {
       ProductService.$on('show', (o) => this.product = o);
     },
+    computed: {
+      toLowerCaseBody () {
+        if (this.product.body !== undefined) {
+          return this.product.body.toLowerCase();
+        }
+      }
+    },
     directives: {
       'fuck': {
         bind (el, binding, vnode) {
@@ -29,8 +36,8 @@
       }
     },
     filters: {
-      reverse(value) {
-        return value && value.split('').reverse().join('');
+      toUppercase (value) {
+        return value && value.toUpperCase();
       }
     }
   };
