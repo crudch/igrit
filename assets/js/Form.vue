@@ -38,7 +38,7 @@
         ProductService.add(this.product.title, this.product.body);
       },
       update () {
-        ProductService.update(this.$route.params['id'], this.product.title, this.product.body);
+        ProductService.update(this.product.id, this.product.title, this.product.body);
       },
       process (callback) {
         if (this.product.title !== '' && this.product.body !== '') {
