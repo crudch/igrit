@@ -3,7 +3,7 @@
 
         <router-link class="card-body crutch-link" :to="{name : 'show', params: {id: product.id}}">
             <h5 class="card-title"># {{index}} {{product.title}}</h5>
-            <p><img v-fuck :data-src="product.url" width="320" height="240" :alt="product.title"></p>
+            <p v-fuck :data-src="product.url"></p>
             <p class="card-text">{{product.body}}</p>
         </router-link>
 
@@ -23,7 +23,11 @@
           const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
-                el.src = el.dataset.src;
+                const img = new Image();
+                img.onload = () => {
+                  el.append(img);
+                };
+                img.src = el.dataset.src;
                 observer.unobserve(el);
               }
             });
