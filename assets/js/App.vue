@@ -21,7 +21,23 @@
 
 <script>
 
-  export default {
+  import { interceptors } from './api';
 
+  export default {
+    created () {
+      interceptors((err) => {
+        if (err.response.status === 401) {
+
+        }
+
+        if (err.response.status === 500) {
+
+        }
+
+        if (err.response.status === 404) {
+            console.log(err.response.data.message);
+        }
+      });
+    }
   };
 </script>

@@ -1,13 +1,13 @@
 <template>
     <div>
-        <product v-for="(product) in productReverse"
+        <product v-for="(product) in products"
                 :key="product.id" :index="product.id" :product="product"></product>
     </div>
 </template>
 
 <script>
   import Product from './Product';
-  import ProductService from './ProductService';
+  import { get } from './api';
 
   export default {
     components: {Product},
@@ -17,12 +17,9 @@
       };
     },
     created () {
-      this.products = ProductService.products;
-    },
-    computed: {
-      productReverse () {
-        return [].concat(this.products).reverse();
-      }
+      get(`/products`).
+        then((res) => this.products = res.data).
+        catch((err) => console.log(err));
     }
   };
 </script>

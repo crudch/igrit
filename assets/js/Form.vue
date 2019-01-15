@@ -1,17 +1,17 @@
 <template>
     <form>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Title" v-model="product.title">
+            <input type="text" class="form-control" placeholder="Заголовок" v-model="product.title">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Body" v-model="product.body">
+            <textarea class="form-control" placeholder="Тект" rows="3" v-model="product.body"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" @click.prevent="process(mode)">{{mode}}</button>
     </form>
 </template>
 
 <script>
-  import ProductService from './ProductService';
+  import { get, post } from './api';
 
   export default {
     props: ['mode'],
@@ -29,21 +29,27 @@
     methods: {
       fetchData () {
         if (this.mode === 'update') {
-          return this.product = ProductService.find(this.$route.params['id']);
+          return get(`/products/${this.$route.params['id']}`).
+            then((res) => this.product = res.data).
+            catch((err) => console.log(err));
         }
 
         return this.product = {title: '', body: ''};
       },
-      add () {
-        ProductService.add(this.product.title, this.product.body);
+      add (callback) {
+        post(`/products`, {title: this.product.title, body: this.product.body}).
+          then((res) => {callback()}).
+          catch((err) => {});
       },
-      update () {
-        ProductService.update(this.product.id, this.product.title, this.product.body);
+      update (callback) {
+        post(`/products/${this.product.id}/edit`,
+          {id: this.product.id, title: this.product.title, body: this.product.body}).
+          then((res) => {callback()}).
+          catch((err) => {});
       },
       process (callback) {
         if (this.product.title !== '' && this.product.body !== '') {
-          this[callback]();
-          this.$router.replace({name: 'home'});
+          this[callback](() => this.$router.replace({name: 'home'}));
         }
       }
     }
