@@ -7,7 +7,7 @@
             <p>{{ product.body }}</p>
         </div>
         <div class="card-footer text-muted text-right">
-            <router-link class="btn btn-outline-primary" :to="{name : 'update'}">Редактировать</router-link>
+            <router-link class="btn btn-outline-primary" :to="{name : 'update', params : {product}}">Редактировать</router-link>
             <button class="btn btn-outline-danger" @click.prevent="deleteData">Удалить</button>
         </div>
     </div>

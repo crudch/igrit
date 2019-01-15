@@ -17,7 +17,10 @@
     props: ['mode'],
     data () {
       return {
-        product: {}
+        product: {
+          title: '',
+          body: ''
+        }
       };
     },
     created () {
@@ -28,23 +31,28 @@
     },
     methods: {
       fetchData () {
-        if (this.mode === 'update') {
-          return get(`/products/${this.$route.params['id']}`).
-            then((res) => this.product = res.data).
-            catch((err) => console.log(err));
+        if (this.mode !== 'update') {
+          return this.product.title = this.product.body = '';
         }
 
-        return this.product = {title: '', body: ''};
+        if (this.$route.params['product']) {
+          return this.product = this.$route.params['product'];
+        }
+
+        return get(`/products/${this.$route.params['id']}`).
+          then((res) => this.product = res.data).
+          catch((err) => console.log(err));
+
       },
       add (callback) {
         post(`/products`, {title: this.product.title, body: this.product.body}).
-          then((res) => {callback()}).
+          then((res) => {callback();}).
           catch((err) => {});
       },
       update (callback) {
         post(`/products/${this.product.id}/edit`,
           {id: this.product.id, title: this.product.title, body: this.product.body}).
-          then((res) => {callback()}).
+          then((res) => {callback();}).
           catch((err) => {});
       },
       process (callback) {
