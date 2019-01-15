@@ -3,6 +3,9 @@
         <div class="card-header">
             <h1>{{ product.title }}</h1>
         </div>
+        <p>
+            <img :src="product.url" width="640" height="480" :alt="product.title">
+        </p>
         <div class="card-body">
             <p>{{ product.body }}</p>
         </div>
