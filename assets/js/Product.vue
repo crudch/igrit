@@ -3,7 +3,7 @@
 
         <router-link class="card-body crutch-link" :to="{name : 'show', params: {id: product.id}}">
             <h5 class="card-title"># {{index}} {{product.title}}</h5>
-            <p v-fuck :data-src="product.url"></p>
+            <p v-fuck :data-src="product.url" class="int-img"></p>
             <p class="card-text">{{product.body}}</p>
         </router-link>
 

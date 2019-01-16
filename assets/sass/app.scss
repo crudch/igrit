@@ -5,11 +5,12 @@
   display: none;
 }
 
-[data-src] {
-  background: #fff url(http://wardex/img/mailservice.gif) center no-repeat;
+.int-img {
+  background: #fff url(/img/blur.jpg) center no-repeat;
   background-size: contain;
   width: 320px;
   height: 240px;
+
   & img {
     width: 320px;
     height: 240px;
