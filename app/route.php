@@ -4,8 +4,13 @@
  */
 
 foreach (['/', '/{id:\d+}', '/create', '/{id:\d+}/edit'] as $url) {
-    $route->get($url, 'IndexController@index');
+    $route->get($url, 'MaxController@index');
 }
+
+foreach (['/min'] as $url) {
+    $route->get($url, 'MinController@index');
+}
+
 
 $route->get('/products', 'ProductController@index');
 $route->get('/products/{id:\d+}', 'ProductController@show');
