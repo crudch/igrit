@@ -1,5 +1,7 @@
 let mix = require('laravel-mix');
 
+const asset = 'min';
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,11 +13,11 @@ let mix = require('laravel-mix');
  |
  */
 
-//mix.js('assets/max/js/app.js', 'public/js/max');
-//mix.sass('assets/max/sass/app.scss', 'public/css/max').options({processCssUrls: false});
+mix.js(`assets/${asset}/js/app.js`, `public/js/${asset}`);
+mix.sass(`assets/${asset}/sass/app.scss`, `public/css/${asset}`).options({processCssUrls: false});
 
-mix.js('assets/min/js/app.js', 'public/js/max');
-mix.sass('assets/min/sass/app.scss', 'public/css/max').options({processCssUrls: false});
+mix.browserSync('wardex/');
+mix.disableNotifications();
 
 // Full API
 // mix.js(src, output);
