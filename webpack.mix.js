@@ -11,8 +11,11 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('assets/max/js/app.js', 'public/js/max');
-mix.sass('assets/max/sass/app.scss', 'public/css/max').options({processCssUrls: false});
+//mix.js('assets/max/js/app.js', 'public/js/max');
+//mix.sass('assets/max/sass/app.scss', 'public/css/max').options({processCssUrls: false});
+
+mix.js('assets/min/js/app.js', 'public/js/max');
+mix.sass('assets/min/sass/app.scss', 'public/css/max').options({processCssUrls: false});
 
 // Full API
 // mix.js(src, output);

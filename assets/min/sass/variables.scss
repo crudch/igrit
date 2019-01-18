@@ -1,0 +1,33 @@
+$ss-color-yellow: #f6bf41;
+$ss-color-brown: #8b3a29;
+$ss-color-light-blue: #3bb6d5;
+$ss-color-blue: #136fb6;
+$ss-color-dark-blue: #06497d;
+$ss-color-red: #c9302c;
+
+$global-primary-background: $ss-color-light-blue;
+$global-secondary-background: $ss-color-blue;
+$global-danger-background: $ss-color-red;
+$ss-theme-background: $ss-color-light-blue;
+
+$global-link-color: $ss-color-light-blue;
+$global-link-hover-color: darken($global-link-color, 10%);
+
+//$global-link-color: #fff;
+//$global-link-hover-color: #fff;
+$base-link-hover-text-decoration: none;
+
+// 2. Import default variables and available mixins.
+@import "~uikit/src/scss/variables-theme.scss";
+@import "~uikit/src/scss/mixins-theme.scss";
+
+@mixin hook-form-single-line() {
+  border-radius: 500px;
+}
+
+@mixin hook-button() {
+  text-transform: $button-text-transform;
+  transition: 0.1s ease-in-out;
+  transition-property: color, background-color, border-color;
+  border-radius: 500px;
+}
