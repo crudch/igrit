@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { EventEmitter } from './app.js';
+  import { EventEmitter } from '../app.js';
 
   export default {
     data () {

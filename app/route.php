@@ -7,7 +7,7 @@ foreach (['/', '/{id:\d+}', '/create', '/{id:\d+}/edit'] as $url) {
     $route->get($url, 'MaxController@index');
 }
 
-foreach (['/min'] as $url) {
+foreach (['/min', '/min/cars'] as $url) {
     $route->get($url, 'MinController@index');
 }
 
