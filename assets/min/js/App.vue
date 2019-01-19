@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <router-view></router-view>
+        <router-view class="uk-container"></router-view>
 
         <div class="uk-section uk-section-secondary uk-light ss-section-footer">
             <div class="uk-container">
