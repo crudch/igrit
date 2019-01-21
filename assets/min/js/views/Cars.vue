@@ -1,35 +1,27 @@
 <template>
-    <div>
-        <div class="uk-section uk-section-default uk-text-center">
-            <div class="uk-container">
+    <main>
+        <article>
+            <h1>Машинки</h1>
 
-                <h1>Машинки</h1>
-
-                <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
-                    <div v-for="car in cars" :key="car.id">
-                        <router-link :to="{name: 'car', params: { id: car.id }}" class="uk-card uk-card-default uk-card-hover uk-card-body">
-                            <div class="uk-card-badge uk-label">Badge</div>
-                            <h3 class="uk-card-title">{{ car.title }}</h3>
-                            <p>{{ car.text }}</p>
-                        </router-link>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+            <section v-for="car in cars" :key="car.id">
+                <h2>{{ car.title }}</h2>
+                <p>{{ car.text }}</p>
+                <router-link :to="{name: 'car', params: { id: car.id }}">Подробнее...</router-link>
+            </section>
+        </article>
+    </main>
 </template>
 
 <script>
   export default {
-    data() {
+    data () {
       return {
-        cars : [
-          {id:1, title: 'Ford', text: 'Ford is best'},
-          {id:2, title: 'Audi', text: 'Audi fucking machine'},
-          {id:3, title: 'BMW', text: 'BMW will kill you'},
-        ],
-      }
+        cars: [
+          {id: 1, title: 'Ford', text: 'Ford is best'},
+          {id: 2, title: 'Audi', text: 'Audi fucking machine'},
+          {id: 3, title: 'BMW', text: 'BMW will kill you'}
+        ]
+      };
     }
   };
 </script>

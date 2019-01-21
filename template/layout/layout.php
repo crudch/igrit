@@ -11,6 +11,13 @@
 </head>
 <body>
 <?php echo $this->renderBlock('content'); ?>
+<footer>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi architecto blanditiis,
+        commodi cumque deleniti doloremque doloribus eaque enim ipsa nam nihil nostrum placeat
+        praesentium provident quibusdam quisquam repudiandae tenetur, velit!
+    </p>
+</footer>
 <?php echo $this->renderBlock('script'); ?>
 </body>
 </html>
