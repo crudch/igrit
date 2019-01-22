@@ -11,6 +11,10 @@ foreach (['/min', '/min/cars', '/min/cars/{id:\d+}'] as $url) {
     $route->get($url, 'MinController@index');
 }
 
+$route->group('/cars', function (\Crudch\Routing\Router $router) {
+    $router->get('/', 'CarController@index');
+});
+
 
 $route->get('/products', 'ProductController@index');
 $route->get('/products/{id:\d+}', 'ProductController@show');

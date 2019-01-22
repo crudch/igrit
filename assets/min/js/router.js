@@ -1,11 +1,17 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
+import Car from './views/Car';
 import Home from './views/Home';
 import Cars from './views/Cars';
-import Car from './views/Car';
 
 Vue.use(Router);
+
+// Lazy loading (fail)
+/*const Car = resolve => {
+  require.ensure(['./views/Car'], () => {
+    resolve(require('./views/Car'));
+  });
+};*/
 
 export default new Router({
   mode: 'history',
