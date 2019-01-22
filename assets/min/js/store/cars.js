@@ -1,5 +1,7 @@
 import { get } from '../api';
 
+// Плохая практика!!!
+
 export default {
   state: {
     cars: []
@@ -10,7 +12,7 @@ export default {
     },
 
     CAR (state, id) {
-      return state[id];
+      //return state[id];
     }
   },
   mutations: {
