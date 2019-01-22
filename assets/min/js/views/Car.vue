@@ -25,9 +25,16 @@
       }
     },
     watch: {
-      $route (toRoute, fromRoute) {
-        this.id = toRoute.params['id'];
+      $route (to, from) {
+        this.id = to.params['id'];
       }
+    },
+    beforeRouteEnter (to, from, next) {
+      console.log('before');
+      next();
+    },
+    beforeRouteLeave (to, from, next) {
+      next(window.confirm('Вернуться обратно?'));
     }
   };
 </script>
