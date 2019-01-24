@@ -2,6 +2,10 @@
 
 namespace App\Middleware;
 
+use Crudch\Middleware\SessionMiddleware;
+use Crudch\Middleware\Handlers\ApiHandlerMiddleware;
+use Crudch\Middleware\Handlers\WebHandlerMiddleware;
+
 /**
  * Class Registrator
  *
@@ -12,8 +16,17 @@ class Registrator
     /**
      * @var array
      */
-    public static $general_middleware = [
-        //ProfilerMiddleware::class,
+    public static $registry = [
+        'global' => [
+            //ProfilerMiddleware::class,
+        ],
+        'web' => [
+            SessionMiddleware::class,
+            WebHandlerMiddleware::class
+        ],
+        'api' => [
+            ApiHandlerMiddleware::class
+        ]
     ];
 
     /**
