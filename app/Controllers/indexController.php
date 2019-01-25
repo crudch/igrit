@@ -4,12 +4,10 @@ namespace App\Controllers;
 
 use Crudch\Foundation\Controller;
 
-class MaxController extends Controller
+class indexController extends Controller
 {
     public function index()
     {
-        return view('index', [
-            'asset' => 'max',
-        ]);
+        return view('index');
     }
 }

@@ -1,9 +1,12 @@
 <?php
+
+use Crudch\Routing\Router;
+
 /**
- * @var \Crudch\Routing\Router $route
+ * @var Router $route
  */
 
-$route->group('/cars', function (\Crudch\Routing\Router $route) {
-    $route->get('/', 'CarController@index');
-    $route->get('/{id:\d+}', 'CarController@show');
+$route->group('/articles', function (Router $router) {
+    $router->get('/', 'ArticleController@index');
 });
+
