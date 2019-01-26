@@ -17,7 +17,7 @@ export default new VueRouter({
   routes: [
     {path: '/', name: 'home', component: Home},
     {path: '/articles', name: 'articles', component: Articles},
-    {path: '/articles/:id(\\d+)', name: 'article.show', component: Article},
+    {path: '/articles/:id(\\d+)', name: 'article.show', component: Article, props: true},
     {path: '/articles/create', name: 'article.create', component: ArticleForm, props : {mode: 'create'}},
     {path: '/articles/:id(\\d)/edit', name: 'article.edit', component: ArticleForm, props : {mode: 'edit'}}
   ]

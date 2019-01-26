@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Article;
 use Crudch\Foundation\Controller;
+use Crudch\Http\Exceptions\NotFoundException;
 use Crudch\Http\Request;
 
 class ArticleController extends Controller
@@ -18,14 +19,27 @@ class ArticleController extends Controller
         return view('index');
     }
 
+    /**
+     * @return \Crudch\Http\Response
+     */
     public function index()
     {
         return json(Article::all('desc'));
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Crudch\Http\Response
+     * @throws NotFoundException
+     */
     public function show($id)
     {
-        // show single article
+        if (!$article = Article::findById($id)) {
+            throw new NotFoundException('Нет такой статьи');
+        }
+
+        return json($article);
     }
 
     public function create()
