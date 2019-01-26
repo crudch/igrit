@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <h1>Home</h1>
-    </div>
+    <main>
+        <h1 class="title">Главная страничка</h1>
+    </main>
 </template>
 
 <script>

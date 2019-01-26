@@ -1,44 +1,20 @@
 <template>
     <div class="container">
+        <nav class="nav-bar">
+            <div class="pure-menu pure-menu-horizontal">
+                <router-link :to="{name: 'home'}" exact class="pure-menu-heading pure-menu-link">ИТАР-ТАСС</router-link>
+                <ul class="pure-menu-list">
 
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
+                    <li class="pure-menu-item" v-for="link in links">
+                        <router-link :to="{name: link.route}" class="pure-menu-link">{{ link.title }}</router-link>
+                    </li>
 
-                <router-link class="navbar-item" :to="{name: 'home'}">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt="logo">
-                </router-link>
-
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-
-            <div class="navbar-menu">
-                <div class="navbar-start">
-                    <router-link class="navbar-item" v-for="link in links" :to="{name: link.route}">
-                        {{ link.title }}
-                    </router-link>
-                </div>
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-primary">
-                                <strong>Регистрация</strong>
-                            </a>
-                            <a class="button is-light">
-                                Вход
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link" @click.prevent="">Финансы</a></li>
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link" @click.prevent="">Техника</a></li>
+                </ul>
             </div>
         </nav>
-
         <router-view></router-view>
-
     </div>
 </template>
 
@@ -47,13 +23,9 @@
     data () {
       return {
         links: [
-          {title: 'Статьи', route: 'articles'}
+          {title: 'Новости', route: 'articles'}
         ]
       };
     }
   };
 </script>
-
-<style>
-
-</style>

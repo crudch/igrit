@@ -13,7 +13,7 @@ export default new VueRouter({
   scrollBehavior () {
     return {x: 0, y: 0};
   },
-  linkActiveClass: 'is-active',
+  linkActiveClass: 'active',
   routes: [
     {path: '/', name: 'home', component: Home},
     {path: '/articles', name: 'articles', component: Articles},

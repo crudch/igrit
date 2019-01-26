@@ -1,14 +1,9 @@
 <template>
-    <div>
-        <h1 class="title is-1">Статейки</h1>
+    <main>
+        <h1 class="title">Очень крутые новости</h1>
 
-        <article-part
-                class="media"
-                v-for="article in articles"
-                :key="article.id"
-                :article="article"
-        ></article-part>>
-    </div>
+        <article-part v-for="article in articles" :key="article.id" :article="article"></article-part>
+    </main>
 </template>
 
 <script>
