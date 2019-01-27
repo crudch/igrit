@@ -35,7 +35,7 @@
     },
     computed: {
       body () {
-        return this.article.short + this.article.body;
+        return `<p>${this.article.short}</p>` + this.article.body;
       }
     },
     created () {
@@ -84,6 +84,10 @@
             margin-bottom: 1rem;
             padding: 1rem;
             box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
+        }
+
+        &-buttons {
+            text-align: right;
         }
     }
 </style>

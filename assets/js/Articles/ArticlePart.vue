@@ -10,7 +10,7 @@
 
             <h2 class="news-title">{{ article.title}}</h2>
 
-            <div v-html="article.short"></div>
+            <p>{{ article.short }}</p>
         </div>
     </router-link>
 </template>
