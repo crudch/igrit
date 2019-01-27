@@ -5,7 +5,7 @@
             <img class="article-img" :src="article.img" width="640" height="480" :alt="article.title">
         </figure>
 
-        <div class="article-body">{{ article.body }}</div>
+        <div class="article-body" v-html="body"></div>
     </article>
 </template>
 
@@ -21,6 +21,11 @@
     },
     watch: {
       '$route': 'fetchNews'
+    },
+    computed: {
+      body () {
+        return this.article.short + this.article.body;
+      }
     },
     created () {
       this.fetchNews();
@@ -41,6 +46,7 @@
 <style lang="scss">
     .article {
         margin-bottom: 3rem;
+        background-color: #f7f6f6;
 
         &-title {
             margin-bottom: 1rem;
@@ -62,7 +68,6 @@
 
         &-body {
             padding: 1rem;
-            background-color: #eee;
             box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
         }
     }
