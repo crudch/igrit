@@ -3,9 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\Article;
+use Crudch\Http\Request;
 use Crudch\Foundation\Controller;
 use Crudch\Http\Exceptions\NotFoundException;
-use Crudch\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -57,9 +57,24 @@ class ArticleController extends Controller
         // show form for update article
     }
 
+    /**
+     * @param         $id
+     * @param Request $request
+     *
+     * @return \Crudch\Http\Response
+     * @throws NotFoundException
+     */
     public function update($id, Request $request)
     {
-        // action update article
+        /** @var Article $article */
+        if (!$article = Article::findById($id)) {
+            throw new NotFoundException('Нет такой статьи');
+        }
+
+        $article->fill($request->all())
+            ->save();
+
+        return json(['status' => 'ok']);
     }
 
     public function destroy($id)

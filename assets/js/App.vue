@@ -19,13 +19,21 @@
 </template>
 
 <script>
+  import Auth from './auth';
+
   export default {
+    created () {
+      Auth.init();
+    },
     data () {
       return {
-        links: [
-          {title: 'Новости', route: 'articles'}
-        ]
+        links: [{title: 'Новости', route: 'articles'}],
       };
+    },
+    computed: {
+      user () {
+        return Auth.user;
+      }
     }
   };
 </script>

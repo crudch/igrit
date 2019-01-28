@@ -35,7 +35,7 @@
 
 <!--suppress ES6CheckImport -->
 <script>
-  import { get } from '../api';
+  import { get, post } from '../api';
   import 'quill/dist/quill.core.css';
   import 'quill/dist/quill.snow.css';
 
@@ -77,7 +77,9 @@
 
       },
       edit (callback) {
-
+        post(`articles/${this.$route.params['id']}/edit`, this.article).
+          then(() => {callback()}).
+          catch((err) => {});
       },
       process (callback) {
         this[callback](() => this.$router.replace({name: 'articles'}));

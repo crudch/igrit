@@ -1,14 +1,15 @@
 import axios from 'axios';
 import qs from 'qs';
+import Auth from './auth';
 
 axios.defaults.baseURL = '/api/';
-axios.defaults.headers['common']['Authorization'] = 'Bearer 123456789';
+axios.defaults.headers['common']['Authorization'] = `Bearer ${Auth.user ? Auth.user.token || '' : ''}`;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 export function get (url) {
   return axios({
     method: 'get',
-    url: url,
+    url: url
   });
 }
 
@@ -16,7 +17,7 @@ export function post (url, data) {
   return axios({
     method: 'post',
     url: url,
-    data: qs.stringify(data),
+    data: qs.stringify(data)
   });
 }
 
