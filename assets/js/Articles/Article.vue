@@ -47,47 +47,9 @@
           then(({data}) => {
             this.article = data;
           }).
-          catch((err) => {console.log(err);});
+          catch(({response}) => {console.log(response);});
       }
     }
 
   };
 </script>
-
-<style lang="scss">
-    .article {
-        margin-bottom: 3rem;
-
-        &-main {
-            background-color: #f7f6f6;
-        }
-
-        &-title {
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-            text-align: center;
-
-            &::before {
-                content: '§';
-                display: inline-block;
-                margin-right: 5px;
-                color: #716f72;
-            }
-        }
-
-        &-figure {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        &-body {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
-        }
-
-        &-buttons {
-            text-align: right;
-        }
-    }
-</style>

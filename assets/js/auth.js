@@ -1,7 +1,7 @@
 export default {
-  user: null,
+  user: {},
   init () {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem('user')) || {};
   },
   set (user) {
     localStorage.setItem('user', JSON.stringify(user));
@@ -10,5 +10,11 @@ export default {
   remove () {
     localStorage.removeItem('user');
     this.user = null;
+  },
+  isUser () {
+    return !!this.user.id;
+  },
+  isGuest () {
+    return !this.isUser();
   }
 };

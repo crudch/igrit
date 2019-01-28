@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component;
+namespace App\Components;
 
 use App\Models\Users\User;
 use App\Models\Users\AuthUser;

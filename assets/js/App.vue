@@ -12,6 +12,22 @@
                     <li class="pure-menu-item"><a href="#" class="pure-menu-link" @click.prevent="">Финансы</a></li>
                     <li class="pure-menu-item"><a href="#" class="pure-menu-link" @click.prevent="">Техника</a></li>
                 </ul>
+
+                <ul class="pure-menu-list" v-if="isUser">
+                    <li class="pure-menu-item">
+                        <a class="pure-menu-link">{{ user['first_name'] }}</a>
+                    </li>
+                </ul>
+
+                <ul class="pure-menu-list" v-else>
+                    <li class="pure-menu-item">
+                        <router-link :to="{name: 'registration'}" class="pure-menu-link">Регистрация</router-link>
+                    </li>
+                    <li class="pure-menu-item">
+                        <router-link :to="{name: 'login'}" class="pure-menu-link">Войти</router-link>
+                    </li>
+                </ul>
+
             </div>
         </nav>
         <router-view></router-view>
@@ -27,13 +43,24 @@
     },
     data () {
       return {
-        links: [{title: 'Новости', route: 'articles'}],
+        links: [{title: 'Новости', route: 'articles'}]
       };
     },
     computed: {
-      user () {
-        return Auth.user;
+      isUser () {
+        return Auth.isUser();
       }
     }
   };
 </script>
+
+<style lang="scss">
+    .pure-menu-horizontal {
+        display: flex;
+        flex-wrap: wrap;
+
+        .pure-menu-list:last-child {
+            margin-left: auto;
+        }
+    }
+</style>

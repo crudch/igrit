@@ -5,5 +5,5 @@
  */
 function auth()
 {
-    return app(\App\Component\Auth::class);
+    return app(\App\Components\Auth::class);
 }

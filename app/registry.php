@@ -7,11 +7,13 @@ return [
         //
     ],
     'web' => [
-        \App\Component\Auth::class => function () {
-            return (new \App\Component\Auth())->getAuthUser();
+        \App\Components\Auth::class => function () {
+            return (new \App\Components\Auth())->getAuthUser();
         },
     ],
     'api' => [
-        //
+        \App\Components\Auth::class => function () {
+            return (new \App\Components\AuthApi())->getAuthUser();
+        },
     ]
 ];

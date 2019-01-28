@@ -8,7 +8,8 @@ use Crudch\Routing\Router;
 
 $route->group('/articles', function (Router $router) {
     $router->get('/', 'ArticleController@index');
-    $router->get('/{id:\d+}', 'ArticleController@show');
+    $router->get('/{id:\d+}', 'ArticleController@show')
+        ->middleware('admin');
     $router->get('/{id:\d+}/edit', 'ArticleController@show');
 
     $router->post('/{id:\d+}/edit', 'ArticleController@update');
