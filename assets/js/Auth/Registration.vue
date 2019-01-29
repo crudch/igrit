@@ -78,7 +78,7 @@
         post('/registration', {email: this.email, password: this.password, first_name: this.first_name}).
           then(({data}) => {
             Auth.set(data);
-            this.$router.replace('/');
+            this.$router.replace({name: 'profile'});
           }).
           catch((err) => {
             if (err.response.status === 422) {

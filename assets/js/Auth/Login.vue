@@ -61,7 +61,7 @@
         post('/login', {email: this.email, password: this.password}).
           then(({data}) => {
             Auth.set(data);
-            this.$router.replace('/');
+            this.$router.replace({name: 'profile'});
           }).
           catch((err) => {
             console.log(err);

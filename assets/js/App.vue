@@ -18,6 +18,9 @@
                         <a class="pure-menu-link">{{ user['first_name'] }}</a>
                         <ul class="pure-menu-children">
                             <li class="pure-menu-item">
+                                <router-link :to="{name: 'profile'}" class="pure-menu-link">Профиль</router-link>
+                            </li>
+                            <li class="pure-menu-item">
                                 <a href="#" class="pure-menu-link" @click.prevent="logout">Выход</a>
                             </li>
                         </ul>
@@ -57,6 +60,7 @@
     methods: {
       logout () {
         Auth.remove();
+        this.$router.replace('/');
       }
     }
   };

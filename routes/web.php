@@ -8,6 +8,7 @@ $route->get('/', 'IndexController@index');
 $routes = [
     '/login',
     '/registration',
+    '/profile',
     '/articles',
     '/articles/{id:\d+}',
     'articles/{id:\d+}/edit',

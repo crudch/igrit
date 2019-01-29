@@ -10,6 +10,8 @@ import Articles from './Articles/Articles';
 import Article from './Articles/Article';
 import ArticleForm from './Articles/ArticleForm';
 
+import Profile from './User/Profile';
+
 import Auth from './auth';
 
 Vue.use(VueRouter);
@@ -28,6 +30,14 @@ export default new VueRouter({
       component: Login,
       beforeEnter: (to, from, next) => {
         next(Auth.isGuest || '/');
+      }
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
+      beforeEnter: (to, from, next) => {
+        next(Auth.isUser || '/');
       }
     },
     {
