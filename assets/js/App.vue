@@ -13,7 +13,7 @@
                     <li class="pure-menu-item"><a href="#" class="pure-menu-link" @click.prevent="">Техника</a></li>
                 </ul>
 
-                <ul class="pure-menu-list" v-if="isUser">
+                <ul class="pure-menu-list" v-if="user.isUser">
                     <li class="pure-menu-item">
                         <a class="pure-menu-link">{{ user['first_name'] }}</a>
                     </li>
@@ -38,29 +38,11 @@
   import Auth from './auth';
 
   export default {
-    created () {
-      Auth.init();
-    },
     data () {
       return {
-        links: [{title: 'Новости', route: 'articles'}]
+        links: [{title: 'Новости', route: 'articles'}],
+        user: Auth.$data
       };
-    },
-    computed: {
-      isUser () {
-        return Auth.isUser();
-      }
     }
   };
 </script>
-
-<style lang="scss">
-    .pure-menu-horizontal {
-        display: flex;
-        flex-wrap: wrap;
-
-        .pure-menu-list:last-child {
-            margin-left: auto;
-        }
-    }
-</style>

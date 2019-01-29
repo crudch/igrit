@@ -6,13 +6,15 @@ axios.defaults.baseURL = '/api/';
 //axios.defaults.headers['common']['Authorization'] = `Bearer ${Auth.user.token}`;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
+function tokenHeaders () {
+  return Auth.isUser ? {'Authorization': `Bearer ${Auth.token}`} : {};
+}
+
 export function get (url) {
   return axios({
     method: 'get',
     url: url,
-    headers: {
-      'Authorization': `Bearer ${Auth.user.token}`
-    }
+    headers: tokenHeaders()
   });
 }
 
@@ -21,9 +23,7 @@ export function post (url, data) {
     method: 'post',
     url: url,
     data: qs.stringify(data),
-    headers: {
-      'Authorization': `Bearer ${Auth.user.token}`
-    }
+    headers: tokenHeaders()
   });
 }
 

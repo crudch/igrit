@@ -1,20 +1,43 @@
-export default {
-  user: {},
-  init () {
-    this.user = JSON.parse(localStorage.getItem('user')) || {};
+import Vue from 'vue';
+
+export default new Vue({
+  data: {
+    id: null,
+    token: null,
+    first_name: null
   },
-  set (user) {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.user = user;
+
+  methods: {
+    init () {
+      const data = JSON.parse(localStorage.getItem('user'));
+
+      if (null === data) {
+        return this.id = this.token = this.first_name = null;
+      }
+
+      this.id = data.id;
+      this.token = data.token;
+      this.first_name = data.first_name;
+    },
+
+    set (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+      this.init();
+    },
+
+    remove () {
+      localStorage.removeItem('user');
+      this.init();
+    }
   },
-  remove () {
-    localStorage.removeItem('user');
-    this.user = null;
-  },
-  isUser () {
-    return !!this.user.id;
-  },
-  isGuest () {
-    return !this.isUser();
+
+  computed: {
+    isUser () {
+      return null !== this.id;
+    },
+
+    isGuest () {
+      return !this.isUser;
+    }
   }
-};
+});

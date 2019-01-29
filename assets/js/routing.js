@@ -26,18 +26,24 @@ export default new VueRouter({
       path: '/login',
       name: 'login',
       component: Login,
-      beforeEnter: (to, from, next) => {next(Auth.isGuest() || '/');}
+      beforeEnter: (to, from, next) => {
+        next(Auth.isGuest || '/');
+      }
     },
     {
       path: '/registration',
       name: 'registration',
       component: Registration,
-      beforeEnter: (to, from, next) => {next(Auth.isGuest() || '/');}
+      beforeEnter: (to, from, next) => {
+        next(Auth.isGuest || '/');
+      }
     },
     {path: '/articles', name: 'articles', component: Articles},
     {
       path: '/articles/:id(\\d+)', name: 'article.show', component: Article, props: true,
-      beforeEnter: (to, from, next) => {next(Auth.isUser() || '/login');}
+      beforeEnter: (to, from, next) => {
+        next(Auth.isUser || '/login');
+      }
     },
     {path: '/articles/create', name: 'article.create', component: ArticleForm, props: {mode: 'create'}},
     {path: '/articles/:id(\\d+)/edit', name: 'article.edit', component: ArticleForm, props: {mode: 'edit'}}
