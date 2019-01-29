@@ -49,10 +49,6 @@
         }
       };
     },
-    beforeRouteEnter (to, from, next) {
-      console.log(Auth.token);
-      next();
-    },
     watch: {
       email () {
         this.errors.email = '';

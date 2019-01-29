@@ -13,7 +13,7 @@
                     <li class="pure-menu-item"><a href="#" class="pure-menu-link" @click.prevent="">Техника</a></li>
                 </ul>
 
-                <ul class="pure-menu-list" v-if="user.isUser">
+                <ul class="pure-menu-list" v-if="isUser">
                     <li class="pure-menu-item">
                         <a class="pure-menu-link">{{ user['first_name'] }}</a>
                     </li>
@@ -43,6 +43,11 @@
         links: [{title: 'Новости', route: 'articles'}],
         user: Auth.$data
       };
+    },
+    computed: {
+      isUser () {
+        return !!this.user.id;
+      }
     }
   };
 </script>

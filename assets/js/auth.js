@@ -7,6 +7,10 @@ export default new Vue({
     first_name: null
   },
 
+  created () {
+    this.init();
+  },
+
   methods: {
     init () {
       const data = JSON.parse(localStorage.getItem('user'));
