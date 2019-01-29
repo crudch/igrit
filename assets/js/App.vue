@@ -14,8 +14,13 @@
                 </ul>
 
                 <ul class="pure-menu-list" v-if="isUser">
-                    <li class="pure-menu-item">
+                    <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                         <a class="pure-menu-link">{{ user['first_name'] }}</a>
+                        <ul class="pure-menu-children">
+                            <li class="pure-menu-item">
+                                <a href="#" class="pure-menu-link" @click.prevent="logout">Выход</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 
@@ -47,6 +52,11 @@
     computed: {
       isUser () {
         return !!this.user.id;
+      }
+    },
+    methods: {
+      logout () {
+        Auth.remove();
       }
     }
   };

@@ -75,9 +75,10 @@
     },
     methods: {
       registration () {
-        post(`/registration`, {email: this.email, password: this.password, first_name: this.first_name}).
+        post('/registration', {email: this.email, password: this.password, first_name: this.first_name}).
           then(({data}) => {
             Auth.set(data);
+            this.$router.replace('/');
           }).
           catch((err) => {
             if (err.response.status === 422) {

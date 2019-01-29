@@ -222,7 +222,15 @@ nav {
   }
 
   &-error-border {
-    border-color: #d00000  !important;
+    border-color: #d00000 !important;
   }
+}
+
+.pure-menu-link {
+  cursor: pointer;
+}
+
+.pure-menu-children {
+  width: 100% !important;
 }
 

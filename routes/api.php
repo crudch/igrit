@@ -15,3 +15,4 @@ $route->group('/articles', function (Router $router) {
 });
 
 $route->post('/registration', 'AuthController@registration');
+$route->post('/login', 'AuthController@login');

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Users\User;
+use App\Requests\LoginRequest;
 use Crudch\Foundation\Controller;
 use App\Requests\RegistrationRequest;
 
@@ -15,12 +16,28 @@ class AuthController extends Controller
             'token'    => token($request->input('email')),
         ]);
 
-        $article = User::create($request);
+        $user = User::create($request);
 
+        return $this->responseUser($user);
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $user = User::findByField('email', $request->input('email'));
+
+        if (!password_verify($request->input('password'), $user->password)) {
+            return json(['errors' => ['password' => 'Неверный пароль']], 422);
+        }
+
+        return $this->responseUser($user);
+    }
+
+    protected function responseUser(User $user)
+    {
         return json([
-            'id'         => $article->id,
-            'token'      => $article->token,
-            'first_name' => $article->first_name,
+            'id'         => $user->id,
+            'token'      => $user->token,
+            'first_name' => $user->first_name,
         ]);
     }
 }
