@@ -15,7 +15,8 @@
             </div>
 
             <div class="form-block">
-                <quill-editor v-model="article.body"></quill-editor>
+                <!--<quill-editor v-model="article.body"></quill-editor>-->
+                <textarea class="pure-input-1 form-input" cols="30" rows="10" v-model="article.body"></textarea>
             </div>
 
             <div class="form-block">
@@ -36,15 +37,15 @@
 <!--suppress ES6CheckImport -->
 <script>
   import { get, post } from '../api';
-  import 'quill/dist/quill.core.css';
-  import 'quill/dist/quill.snow.css';
+  //import 'quill/dist/quill.core.css';
+  //import 'quill/dist/quill.snow.css';
 
-  import { quillEditor } from 'vue-quill-editor';
+  //import { quillEditor } from 'vue-quill-editor';
 
   export default {
-    components: {
+    /*components: {
       quillEditor
-    },
+    },*/
     props: ['mode'],
     data () {
       return {
