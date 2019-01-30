@@ -32,10 +32,10 @@ class AuthController extends Controller
         return $this->responseUser($user);
     }
 
+
     protected function responseUser(User $user)
     {
         return json([
-            'id'         => $user->id,
             'token'      => $user->token,
             'first_name' => $user->first_name,
         ]);

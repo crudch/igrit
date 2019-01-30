@@ -54,12 +54,12 @@
     },
     computed: {
       isUser () {
-        return !!this.user.id;
+        return !!this.user.token;
       }
     },
     methods: {
       logout () {
-        Auth.remove();
+        Auth.clear();
         this.$router.replace('/');
       }
     }
