@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import { get } from './api';
 
 export default new Vue({
   data: {
-    user: null,
+    id: null,
+    first_name: null,
     token: null
   },
 
@@ -13,20 +13,13 @@ export default new Vue({
 
   methods: {
     init () {
-      const token = localStorage.getItem('token');
-
-      if (null !== token) {
-
-      }
+      const data = JSON.parse(localStorage.getItem('user'));
+      null !== data && this.setData(data);
     },
 
     set (key, value = null) {
-      const o = typeof key === 'object' ? key : {[key]: value};
-
-      Object.keys(o).forEach((key) => {
-        this[key] = o[key];
-      }, o);
-
+      const data = typeof key === 'object' ? key : {[key]: value};
+      this.setData(data);
       localStorage.setItem('user', JSON.stringify(this.$data));
     },
 
@@ -37,13 +30,21 @@ export default new Vue({
         }
       }
 
-      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    },
+
+    setData (obj) {
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          this[key] = obj[key];
+        }
+      }
     }
   },
 
   computed: {
     isUser () {
-      return null !== this.user;
+      return null !== this.id;
     },
 
     isGuest () {

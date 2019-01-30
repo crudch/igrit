@@ -16,6 +16,7 @@ $route->group('/articles', function (Router $router) {
 
 $route->group('/profile', function (Router $router) {
     $router->get('/', 'ProfileController@index');
+    $router->post('/save', 'ProfileController@save');
 });
 
 $route->post('/registration', 'AuthController@registration');

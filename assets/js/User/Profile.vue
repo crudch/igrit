@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import { get } from '../api';
+  import { get, post } from '../api';
   import Auth from '../auth';
 
   export default {
@@ -44,7 +44,12 @@
         }
 
         this.old[target.id] = this.user[target.id];
-        target.id === 'first_name' &&  Auth.set('first_name', this.user[target.id]);
+
+        post('/profile/save', {[target.id] : this.user[target.id]}).
+          then(({data}) => {
+            target.id === 'first_name' && Auth.set('first_name', this.user[target.id]);
+          }).
+          catch((err) => {});
 
         target.blur();
       }
