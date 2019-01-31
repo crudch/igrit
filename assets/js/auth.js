@@ -3,8 +3,9 @@ import Vue from 'vue';
 export default new Vue({
   data: {
     id: null,
-    first_name: null,
-    token: null
+    token: null,
+    avatar: null,
+    first_name: null
   },
 
   created () {

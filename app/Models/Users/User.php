@@ -11,6 +11,7 @@ use Crudch\Date\CrutchDate;
  * @property string     $email
  * @property string     $password
  * @property string     $token
+ * @property string     $avatar
  * @property string     $first_name
  * @property int        $role
  * @property CrutchDate $created_at
@@ -23,6 +24,7 @@ class User extends Model
         'email',
         'password',
         'token',
+        'avatar',
         'first_name',
         'role',
     ];
