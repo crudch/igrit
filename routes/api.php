@@ -19,5 +19,9 @@ $route->group('/profile', function (Router $router) {
     $router->post('/save', 'ProfileController@save');
 });
 
+$route->group('/upload', function (Router $router) {
+    $router->post('/avatar', 'ProfileController@upload');
+});
+
 $route->post('/registration', 'AuthController@registration');
 $route->post('/login', 'AuthController@login');

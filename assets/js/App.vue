@@ -15,7 +15,10 @@
 
                 <ul class="pure-menu-list" v-if="isUser">
                     <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                        <a class="pure-menu-link">{{ user['first_name'] }}</a>
+                        <a class="pure-menu-link link-bold">
+                            <img :src="avatar" width="30" height="30" alt="Avatar">
+                            {{ user['first_name'] }}
+                        </a>
                         <ul class="pure-menu-children">
                             <li class="pure-menu-item">
                                 <router-link :to="{name: 'profile'}" class="pure-menu-link">Профиль</router-link>
@@ -55,6 +58,9 @@
     computed: {
       isUser () {
         return !!this.user.token;
+      },
+      avatar () {
+        return this.user.avatar || '/img/avatar.svg';
       }
     },
     methods: {

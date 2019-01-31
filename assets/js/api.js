@@ -27,6 +27,15 @@ export function post (url, data) {
   });
 }
 
+export function upload (url, data) {
+  return axios({
+    method: 'post',
+    url: url,
+    data: data,
+    headers: tokenHeaders()
+  });
+}
+
 export function interceptors (callback) {
   axios.interceptors.response.use((res) => {
     return res;
