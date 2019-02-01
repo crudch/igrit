@@ -8,9 +8,6 @@
                     <li class="pure-menu-item" v-for="link in links">
                         <router-link :to="{name: link.route}" class="pure-menu-link">{{ link.title }}</router-link>
                     </li>
-
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link" @click.prevent="">Финансы</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link" @click.prevent="">Техника</a></li>
                 </ul>
 
                 <ul class="pure-menu-list" v-if="isUser">
@@ -51,9 +48,15 @@
   export default {
     data () {
       return {
-        links: [{title: 'Новости', route: 'articles'}],
+        links: [
+          {title: 'Новости', route: 'articles'},
+          {title: 'Чат', route: 'chat'}
+        ],
         user: Auth.$data
       };
+    },
+    created() {
+      this.$store.dispatch('init', 'user');
     },
     computed: {
       isUser () {

@@ -6,13 +6,14 @@
 $route->get('/', 'IndexController@index');
 
 $routes = [
+    '/chat',
     '/login',
-    '/registration',
     '/profile',
     '/articles',
+    '/registration',
+    '/articles/create',
     '/articles/{id:\d+}',
-    'articles/{id:\d+}/edit',
-    'articles/create',
+    '/articles/{id:\d+}/edit',
 ];
 
 foreach ($routes as $url) {

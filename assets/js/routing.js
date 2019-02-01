@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from './Home';
+import Chat from './Chat/Chat';
 
 import Login from './Auth/Login';
 import Registration from './Auth/Registration';
@@ -24,6 +25,7 @@ export default new VueRouter({
   linkActiveClass: 'active',
   routes: [
     {path: '/', name: 'home', component: Home},
+    {path: '/chat', name: 'chat', component: Chat, beforeEnter: (to, from, next) => {next(Auth.isUser || '/login');}},
     {
       path: '/login',
       name: 'login',

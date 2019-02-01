@@ -61,6 +61,7 @@
         post('/login', {email: this.email, password: this.password}).
           then(({data}) => {
             Auth.set(data);
+            this.$store.dispatch('setUser', data);
             this.$router.replace({name: 'profile'});
           }).
           catch((err) => {
