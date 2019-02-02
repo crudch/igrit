@@ -59,7 +59,7 @@ CREATE TABLE `chat` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `ch_timestamp` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=477963 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=478007 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `token` (`token`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +128,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'skiphog@gmail.com','$2y$10$tWuYmH1WL0l0Y2Q1cGF0remMbE8Onn7FK1yOcGcPnEbN38U1WxRkG','0e0b06f3591ee44276a4c88c795af335c1e278d7f9cda7b63da73d32a7b05aa1','/img/1d2cd449d7a69c660c102bf11c9a0dc4.jpg','Wardex',1,'2019-01-31 18:30:21');
+INSERT INTO `users` VALUES (1,'skiphog@gmail.com','$2y$10$tWuYmH1WL0l0Y2Q1cGF0remMbE8Onn7FK1yOcGcPnEbN38U1WxRkG','0e0b06f3591ee44276a4c88c795af335c1e278d7f9cda7b63da73d32a7b05aa1','/img/1d2cd449d7a69c660c102bf11c9a0dc4.jpg','Wardex',1,'2019-01-31 18:30:21'),(2,'1@1.ru','$2y$10$r/2GwMf3rC1eP3NEr.oVlumGkZJGp7jh/YiA/bTw7aSWRPRRUGMB6','8af5a7529c5f1cbe6ca7df7d02eb43bf6471e361eada9b5abf7ef0de3f360a9a',NULL,'Первый',1,'2019-02-02 21:03:12'),(3,'2@2.ru','$2y$10$ePuvcm17ZiZxs7GAKZX6WOJ22rmqSZJ5jmJgGBzIQT3ojADq6bPe2','0cf2b66853f6f1871632743c5137f32f73f15dba308be158946e1b823bb09bf5',NULL,'Ахуенный',1,'2019-02-02 21:03:38');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -141,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-02 19:14:46
+-- Dump completed on 2019-02-03  0:31:29
