@@ -1,20 +1,39 @@
+import { get, post } from '../api';
+
 export default {
   state: {
-    messages: [{user: 'Оператор #1', text: 'Чем я могу вам помочь?'}]
+    messages: [],
+    timer: null,
+    id: 0
   },
   getters: {
-    messages: state => state.messages
+    messages: state => state.messages,
+    id: state => state.id
   },
   mutations: {
-    ADD_MESSAGE (state, payload) {
-      state.messages.push(payload);
+    SHOW (state, payload) {
+      clearTimeout(state.timer);
+      if (payload.length) {
+        state.id = payload[0].id;
+        payload.reverse().forEach((val) => {
+          state.messages.push(val);
+        });
+      }
+
+      state.timer = setTimeout(() => {
+        this.dispatch('show');
+      }, 10000);
     }
   },
   actions: {
+    show ({commit, getters}) {
+      get(`chat/all/${getters.id}`).then(({data}) => {
+        commit('SHOW', data);
+      });
+    },
     addMessage ({commit, getters}, payload) {
-      commit('ADD_MESSAGE', {
-        user: payload.name,
-        text: payload.message
+      post('/chat/store', payload).then(() => {
+        this.dispatch('show');
       });
     }
   }

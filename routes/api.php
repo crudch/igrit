@@ -23,5 +23,10 @@ $route->group('/upload', function (Router $router) {
     $router->post('/avatar', 'ProfileController@upload');
 });
 
+$route->group('/chat', function (Router $router) {
+    $router->get('/all/{id:\d+}', 'ChatController@index');
+    $router->post('/store', 'ChatController@store');
+});
+
 $route->post('/registration', 'AuthController@registration');
 $route->post('/login', 'AuthController@login');

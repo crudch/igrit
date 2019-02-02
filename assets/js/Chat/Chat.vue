@@ -4,14 +4,15 @@
 
         <div class="chat" ref="chat">
             <p class="chat-message" v-for="(message, index) in messages" :key="index">
-                <small>{{ message.user }}</small>
+                <small @click="insertName(message.name)">{{ message.name }}</small>
+                <span class="chat-date">({{ message.created_at }})</span>
                 <br>
-                <span>{{ message.text }}</span>
+                <span v-bold="{u: user.first_name, m: message.message}"></span>
             </p>
         </div>
 
         <form class="chat-form" @submit.prevent="addMessage">
-            <input type="text" v-model="msg" placeholder="Сообщение">
+            <input ref="message" type="text" v-model="msg" placeholder="Сообщение">
             <button type="submit">Отправить</button>
         </form>
 
@@ -19,7 +20,8 @@
 </template>
 
 <script>
-    import Auth from '../auth';
+  import Auth from '../auth';
+
   export default {
     data () {
       return {
@@ -32,14 +34,57 @@
         return this.$store.getters.messages;
       }
     },
+    created () {
+      this.fetch();
+    },
+    directives: {
+      'bold': {
+        inserted (el, {value}) {
+          el.innerHTML = value.m.replace(/{{(.+?)}}/g, (s, el) => {
+            return `<b class="chat-bold-${+(value.u === el)}">${el}</b>`;
+          });
+        }
+      }
+    },
     methods: {
       addMessage () {
-        this.$store.dispatch('addMessage', {name: this.user.first_name , message: this.msg}).then(() => {
+        this.$store.dispatch('addMessage', {name: this.user.first_name, message: this.msg}).then(() => {
           this.msg = '';
           setTimeout(() => {
             this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
           }, 0);
         });
+      },
+      insertName (name) {
+        const input = this.$refs.message;
+        const value = `{{${name}}}, `;
+        if (input.selectionStart || input.selectionStart === 0) {
+          const startPos = input.selectionStart;
+          const endPos = input.selectionEnd;
+          const scrollTop = input.scrollTop;
+          this.msg = this.msg.substring(0, startPos) + value + this.msg.substring(endPos, this.msg.length);
+          input.focus();
+          const embed = startPos + value.length;
+          input.selectionStart = embed;
+          input.selectionEnd = embed;
+          input.scrollTop = scrollTop;
+        } else {
+          this.msg += value;
+          input.focus();
+        }
+      },
+      fetch () {
+        this.$store.dispatch('show').then(() => {});
+      },
+      scroll () {
+        setTimeout(() => {
+          this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
+        }, 0);
+      }
+    },
+    watch: {
+      messages () {
+        this.scroll();
       }
     }
   };
@@ -47,7 +92,7 @@
 
 <style lang="scss">
     .chat {
-        height: 200px;
+        height: 300px;
         overflow-y: scroll;
         margin-bottom: 2rem;
         background-color: #fbfbfb;
@@ -61,7 +106,22 @@
 
             small {
                 font-weight: 700;
+                cursor: pointer;
             }
+        }
+
+        &-date {
+            font-weight: 700;
+            font-size: .7em;
+            color: #777
+        }
+
+        &-bold-0 {
+            color: darkslategray;
+        }
+
+        &-bold-1 {
+            color: tomato;
         }
     }
 
