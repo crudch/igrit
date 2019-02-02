@@ -60,15 +60,16 @@
       loginUser () {
         post('/login', {email: this.email, password: this.password}).
           then(({data}) => {
-            Auth.set(data);
-            this.$store.dispatch('setUser', data);
-            this.$router.replace({name: 'profile'});
+            Auth.set(data).then(() => {
+              this.$router.replace({name: 'profile'});
+            });
           }).
           catch((err) => {
-            console.log(err);
             if (err.response.status === 422) {
-              this.errors = err.response.data.errors;
+              return this.errors = err.response.data.errors;
             }
+
+            console.log(err);
           });
       }
     }

@@ -19,19 +19,32 @@ export default new Vue({
     },
 
     set (key, value = null) {
-      const data = typeof key === 'object' ? key : {[key]: value};
-      this.setData(data);
-      localStorage.setItem('user', JSON.stringify(this.$data));
+      return new Promise((resolve, reject) => {
+        try {
+          const data = typeof key === 'object' ? key : {[key]: value};
+          this.setData(data);
+          localStorage.setItem('user', JSON.stringify(this.$data));
+          resolve();
+        } catch (e) {
+          reject(e);
+        }
+      });
     },
 
     clear () {
-      for (let key in this.$data) {
-        if (this.$data.hasOwnProperty(key)) {
-          this[key] = null;
+      return new Promise((resolve, reject) => {
+        try {
+          for (let key in this.$data) {
+            if (this.$data.hasOwnProperty(key)) {
+              this[key] = null;
+            }
+          }
+          localStorage.removeItem('user');
+          resolve();
+        } catch (e) {
+          reject(e);
         }
-      }
-
-      localStorage.removeItem('user');
+      });
     },
 
     setData (obj) {

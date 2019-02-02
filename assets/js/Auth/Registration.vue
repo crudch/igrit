@@ -77,13 +77,16 @@
       registration () {
         post('/registration', {email: this.email, password: this.password, first_name: this.first_name}).
           then(({data}) => {
-            Auth.set(data);
-            this.$router.replace({name: 'profile'});
+            Auth.set(data).then(() => {
+              this.$router.replace({name: 'profile'});
+            });
           }).
           catch((err) => {
             if (err.response.status === 422) {
-              this.errors = err.response.data.errors;
+              return this.errors = err.response.data.errors;
             }
+
+            console.log(err);
           });
       }
     }

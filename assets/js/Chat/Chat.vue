@@ -19,23 +19,22 @@
 </template>
 
 <script>
+    import Auth from '../auth';
   export default {
     data () {
       return {
-        msg: ''
+        msg: '',
+        user: Auth.$data
       };
     },
     computed: {
-      user () {
-        return this.$store.getters.user;
-      },
       messages () {
         return this.$store.getters.messages;
       }
     },
     methods: {
       addMessage () {
-        this.$store.dispatch('addMessage', this.msg).then(() => {
+        this.$store.dispatch('addMessage', {name: this.user.first_name , message: this.msg}).then(() => {
           this.msg = '';
           setTimeout(() => {
             this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;

@@ -55,9 +55,6 @@
         user: Auth.$data
       };
     },
-    created() {
-      this.$store.dispatch('init', 'user');
-    },
     computed: {
       isUser () {
         return !!this.user.token;
@@ -68,8 +65,7 @@
     },
     methods: {
       logout () {
-        Auth.clear();
-        this.$router.replace('/');
+        Auth.clear().then(() => this.$router.replace('/'));
       }
     }
   };
