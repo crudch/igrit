@@ -22,7 +22,10 @@ export default {
 
       state.timer = setTimeout(() => {
         this.dispatch('show');
-      }, 10000);
+      }, 5000);
+    },
+    CLEAR_TIMER (state) {
+      clearTimeout(state.timer);
     }
   },
   actions: {

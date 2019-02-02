@@ -86,6 +86,10 @@
       messages () {
         this.scroll();
       }
+    },
+    beforeRouteLeave (to, from, next) {
+      this.$store.commit('CLEAR_TIMER');
+      next();
     }
   };
 </script>
