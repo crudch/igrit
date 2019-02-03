@@ -3,7 +3,7 @@
         <h1>Чат</h1>
 
         <div class="chat" ref="chat" @scroll="unshiftMessage">
-            <p class="chat-message" v-for="(message, index) in messages" :key="index">
+            <p class="chat-message" v-for="message in messages" :key="message.id">
                 <small @click="insertName(message.name)">{{ message.name }}</small>
                 <span class="chat-date">({{ message['created_at'] }})</span>
                 <br>
@@ -31,12 +31,28 @@
     data () {
       return {
         msg: '',
-        user: Auth.$data
+        user: Auth.$data,
+        sHeight: 0,
+        refresh: false
       };
     },
     computed: {
       messages () {
         return this.$store.getters.messages;
+      },
+      subscribe () {
+        return this.$store.getters.subscribe;
+      },
+      subAdd () {
+        return this.$store.getters.sub_add;
+      }
+    },
+    watch: {
+      subscribe () {
+        this.scroll();
+      },
+      subAdd () {
+        this.refresh = true;
       }
     },
     created () {
@@ -58,9 +74,6 @@
       addMessage () {
         this.$store.dispatch('addMessage', {name: this.user.first_name, message: this.msg}).then(() => {
           this.msg = '';
-          setTimeout(() => {
-            this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
-          }, 0);
         });
       },
       insertName (name) {
@@ -86,6 +99,7 @@
       },
       scroll () {
         setTimeout(() => {
+          this.sHeight = this.$refs.chat.scrollHeight;
           this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
         }, 0);
       },
@@ -95,14 +109,19 @@
         }
       }
     },
-    watch: {
-      messages () {
-        this.scroll();
-      }
-    },
     beforeRouteLeave (to, from, next) {
       this.$store.commit('CLEAR_TIMER');
       next();
+    },
+    mounted () {
+      this.scroll();
+    },
+    updated () {
+      if (this.refresh) {
+        this.refresh = false;
+        this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight - this.sHeight;
+        this.sHeight = this.$refs.chat.scrollHeight;
+      }
     }
   };
 </script>
@@ -131,6 +150,13 @@
             font-weight: 700;
             font-size: .7em;
             color: #777
+        }
+
+        &-number {
+            display: inline-block;
+            margin-right: 5px;
+            border: 1px dashed;
+            padding: 0 5px;
         }
     }
 

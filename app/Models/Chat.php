@@ -26,7 +26,7 @@ class Chat extends Model
     public static function addById($id)
     {
         $sql = /** @lang */
-            'select * from chat where id < ' . (int)$id . ' order by id desc limit 20';
+            'select * from chat where id < ' . (int)$id . ' order by id desc limit 21';
 
         return db()
             ->query($sql)
