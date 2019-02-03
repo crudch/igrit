@@ -25,6 +25,7 @@ $route->group('/upload', function (Router $router) {
 
 $route->group('/chat', function (Router $router) {
     $router->get('/all/{id:\d+}', 'ChatController@index');
+    $router->get('/add/{id:\d+}', 'ChatController@add');
     $router->post('/store', 'ChatController@store');
 });
 

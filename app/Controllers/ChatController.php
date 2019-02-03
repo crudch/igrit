@@ -15,6 +15,13 @@ class ChatController extends Controller
         return json($chat);
     }
 
+    public function add($id)
+    {
+        $chat = Chat::addById($id);
+
+        return json($chat);
+    }
+
     public function store(ChatRequest $request)
     {
         Chat::create($request);

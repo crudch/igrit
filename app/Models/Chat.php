@@ -22,4 +22,14 @@ class Chat extends Model
             ->query($sql)
             ->fetchAll(\PDO::FETCH_CLASS, static::class);
     }
+
+    public static function addById($id)
+    {
+        $sql = /** @lang */
+            'select * from chat where id < ' . (int)$id . ' order by id desc limit 20';
+
+        return db()
+            ->query($sql)
+            ->fetchAll(\PDO::FETCH_CLASS, static::class);
+    }
 }

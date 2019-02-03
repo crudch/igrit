@@ -2,12 +2,16 @@
     <div>
         <h1>Чат</h1>
 
-        <div class="chat" ref="chat">
+        <div class="chat" ref="chat" @scroll="unshiftMessage">
             <p class="chat-message" v-for="(message, index) in messages" :key="index">
                 <small @click="insertName(message.name)">{{ message.name }}</small>
-                <span class="chat-date">({{ message.created_at }})</span>
+                <span class="chat-date">({{ message['created_at'] }})</span>
                 <br>
-                <span v-bold="{u: user.first_name, m: message.message}"></span>
+                <!--<span v-bold="{u: user.first_name, m: message.message}"></span>-->
+                <chat-message
+                        :message="message.message"
+                        :name="user.first_name"
+                ></chat-message>
             </p>
         </div>
 
@@ -21,6 +25,7 @@
 
 <script>
   import Auth from '../auth';
+  import ChatMessage from './ChatMessage';
 
   export default {
     data () {
@@ -36,6 +41,9 @@
     },
     created () {
       this.fetch();
+    },
+    components: {
+      ChatMessage
     },
     directives: {
       'bold': {
@@ -80,6 +88,11 @@
         setTimeout(() => {
           this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
         }, 0);
+      },
+      unshiftMessage (e) {
+        if (e.target.scrollTop === 0) {
+          this.$store.dispatch('add').then(() => {});
+        }
       }
     },
     watch: {
@@ -118,14 +131,6 @@
             font-weight: 700;
             font-size: .7em;
             color: #777
-        }
-
-        &-bold-0 {
-            color: darkslategray;
-        }
-
-        &-bold-1 {
-            color: tomato;
         }
     }
 
