@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import Home from './Home';
 import Chat from './Chat/Chat';
+import SimpleChat from './SimpleChat/SimpleChat';
 
 import Login from './Auth/Login';
 import Registration from './Auth/Registration';
@@ -26,6 +27,7 @@ export default new VueRouter({
   routes: [
     {path: '/', name: 'home', component: Home},
     {path: '/chat', name: 'chat', component: Chat, beforeEnter: (to, from, next) => {next(Auth.isUser || '/login');}},
+    {path: '/simple-chat', name: 'simpleChat', component: SimpleChat, beforeEnter: (to, from, next) => {next(Auth.isUser || '/login');}},
     {
       path: '/login',
       name: 'login',

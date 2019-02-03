@@ -10,6 +10,7 @@ $routes = [
     '/login',
     '/profile',
     '/articles',
+    '/simple-chat',
     '/registration',
     '/articles/create',
     '/articles/{id:\d+}',
