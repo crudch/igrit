@@ -7,6 +7,10 @@
     <meta name="description" content="<?php echo $this->renderBlock('description'); ?>">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo url('/css/app.css'); ?>">
+    <!--[if IE]>
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <![endif]-->
     <?php echo $this->renderBlock('style') ?>
     <title><?php echo $this->renderBlock('title'); ?></title>
 </head>

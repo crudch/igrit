@@ -22,7 +22,11 @@
       'fuck': {
         inserted (el) {
           if (!('IntersectionObserver' in window)) {
-            return el.src = el.dataset.src;
+            const img = new Image();
+            img.onload = () => {
+              el.appendChild(img);
+            };
+            return img.src = el.dataset.src;
           }
 
           const observer = new IntersectionObserver((entries, observer) => {

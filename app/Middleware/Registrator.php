@@ -19,14 +19,16 @@ class Registrator
     public static $registry = [
         'global' => [
             //ProfilerMiddleware::class,
+            //SessionMiddleware::class,
         ],
         'web' => [
             SessionMiddleware::class,
-            WebHandlerMiddleware::class
+            WebHandlerMiddleware::class,
         ],
         'api' => [
-            ApiHandlerMiddleware::class
-        ]
+            ApiHandlerMiddleware::class,
+            NoCacheMiddleware::class,
+        ],
     ];
 
     /**

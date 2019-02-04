@@ -143,6 +143,10 @@
     components: {
       ChatMessage
     },
+    beforeRouteLeave (to, from, next) {
+      clearTimeout(this.timer);
+      next();
+    }
   };
 </script>
 
