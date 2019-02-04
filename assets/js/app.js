@@ -1,6 +1,3 @@
-//window.Promise = require('es6-promise').Promise;
-window.fuck = 'FUCK';
-
 import Vue from 'vue';
 import App from './App.vue';
 import router from './routing';
