@@ -6,9 +6,9 @@
 $route->get('/', 'IndexController@index');
 
 $routes = [
-    '/chat',
     '/login',
     '/profile',
+    '/products',
     '/articles',
     '/simple-chat',
     '/registration',

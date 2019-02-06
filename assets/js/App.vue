@@ -50,8 +50,8 @@
       return {
         links: [
           {title: 'Новости', route: 'articles'},
-          {title: 'Чат', route: 'chat'},
-          {title: 'Чат2', route: 'simpleChat'}
+          {title: 'Чат', route: 'simpleChat'},
+          {title: 'Товары', route: 'products'}
         ],
         user: Auth.$data
       };
