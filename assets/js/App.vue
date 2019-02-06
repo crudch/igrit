@@ -10,6 +10,17 @@
                     </li>
                 </ul>
 
+                <ul class="pure-menu-list" v-if="count">
+                    <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                        <span class="pure-menu-link">Корзина: {{ count }} шт. - {{ price }} ₽</span>
+                        <ul class="pure-menu-children">
+                            <li class="pure-menu-item">
+                                <a class="pure-menu-link" @click.prevent="clearCart">Очистить</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
                 <ul class="pure-menu-list" v-if="isUser">
                     <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                         <a class="pure-menu-link link-bold">
@@ -44,6 +55,7 @@
 
 <script>
   import Auth from './auth';
+  import { mapGetters } from 'vuex';
 
   export default {
     data () {
@@ -57,6 +69,7 @@
       };
     },
     computed: {
+      ...mapGetters(['count', 'price']),
       isUser () {
         return !!this.user.token;
       },
@@ -67,7 +80,13 @@
     methods: {
       logout () {
         Auth.clear().then(() => this.$router.replace('/'));
+      },
+      clearCart () {
+        this.$store.dispatch('clear').then(() => {});
       }
+    },
+    created () {
+      this.$store.dispatch('init').then(() => {});
     }
   };
 </script>

@@ -36,6 +36,12 @@ export function upload (url, data) {
   });
 }
 
+export function short (text, size) {
+  return text.length > size
+    ? text.slice(0, size > 3 ? size - 3 : size) + '...'
+    : text;
+}
+
 export function interceptors (callback) {
   axios.interceptors.response.use((res) => {
     return res;

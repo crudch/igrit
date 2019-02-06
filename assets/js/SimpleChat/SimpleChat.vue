@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Просто чат</h1>
+        <h1 class="title">Просто чат</h1>
 
         <div class="chat" ref="chat" @scroll="unshiftMessage">
             <p class="chat-message" v-for="message in messages" :key="message.id">

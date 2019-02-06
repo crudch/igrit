@@ -14,6 +14,11 @@ $route->group('/articles', function (Router $router) {
     $router->post('/{id:\d+}/edit', 'ArticleController@update');
 });
 
+
+$route->group('/products', function (Router $router) {
+    $router->get('/', 'ProductController@index');
+});
+
 $route->group('/profile', function (Router $router) {
     $router->get('/', 'ProfileController@index');
     $router->post('/save', 'ProfileController@save');
