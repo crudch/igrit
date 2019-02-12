@@ -13,6 +13,9 @@ export default {
       return state.products.reduce((acc, product) => {
         return product['quantity'] + acc;
       }, 0);
+    },
+    ids: state => {
+      return state.products.map(product => product.id);
     }
   },
   mutations: {
