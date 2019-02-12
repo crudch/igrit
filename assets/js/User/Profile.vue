@@ -48,7 +48,7 @@
       get('/profile').
         then(({data}) => {
           this.user = data;
-          this.old = Object.assign({}, data);
+          this.old = Object.assign({}, data); // { ...data }
         }).
         catch((err) => console.log(err));
     },
