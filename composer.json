@@ -3,7 +3,7 @@
   "license": "MIT",
   "description": "Application Wardex",
   "require": {
-    "php": "^7.2",
+    "php": "^7.3",
     "ext-pdo": "*",
     "claviska/simpleimage": "^3.3",
     "crudch/framework": "dev-master"
