@@ -1,7 +1,7 @@
 {
   "name": "crudch/igrit",
   "license": "MIT",
-  "description": "Application Wardex",
+  "description": "Application Igrit",
   "require": {
     "php": "^7.3",
     "ext-pdo": "*",
