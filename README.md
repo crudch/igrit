@@ -1,2 +1,2 @@
-# Small crutch wardex package.
+# Small crutch igrit package.
 This is a test package.
