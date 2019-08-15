@@ -33,7 +33,7 @@ class Events
                 'type' => 'write',
             ]));
         }*/
-        Gateway::sendToAll('fuck');
+        //Gateway::sendToAll('fuck');
     }
 
     /**
@@ -43,11 +43,16 @@ class Events
      */
     public static function onClose($client_id)
     {
-        //$user_id = $_SESSION['uid'];
+        $user_id = $_SESSION['id'];
 
-        //print_r($user_id);
-        // 向所有人发送
-        GateWay::sendToAll("$client_id has go on");
+        if (!(bool)Gateway::isUidOnline($user_id)) {
+            GateWay::sendToAll(json_encode([
+                'type' => 'leave',
+                'data' => [
+                    'id' => $user_id,
+                ]
+            ]));
+        }
     }
 
     /**

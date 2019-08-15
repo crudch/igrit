@@ -51,7 +51,6 @@
       };
     },
     created () {
-      //this.fetch();
       this.ws = this.socket();
     },
     mounted () {
@@ -164,6 +163,12 @@
                   this.down = true;
                 }
               });
+              break;
+            case 'join' :
+              this.clients.push({id: data['data']['id'], first_name: data['data']['first_name']});
+              break;
+            case 'leave' :
+              this.clients = this.clients.filter((n) => n.id !== data['data']['id']);
               break;
             case 'message':
               break;
