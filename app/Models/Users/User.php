@@ -2,6 +2,7 @@
 
 namespace App\Models\Users;
 
+use Crudch\Database\ActiveRecord;
 use Crudch\Database\Model;
 use Crudch\Date\CrutchDate;
 
@@ -20,6 +21,8 @@ use Crudch\Date\CrutchDate;
  */
 class User extends Model
 {
+    use ActiveRecord;
+
     protected $fillable = [
         'email',
         'password',
@@ -38,7 +41,7 @@ class User extends Model
 
     public static function existsActiveUserByEmail($email)
     {
-        $sql = 'select exists(select * from users where email = :email and role > 0 limit 1)';
+        $sql = 'select exists(select * from users where email = :email and `role` > 0)';
 
         $sth = db()->prepare($sql);
         $sth->execute(['email' => $email]);

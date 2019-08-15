@@ -55,8 +55,7 @@ class Registration extends Model
         $sql = 'select exists(select * from registration 
           where email = :email 
           and operation = :operation 
-          and created_at > date_sub(now(), interval ' . static::RETRIEVED_TIME . ' minute) 
-        limit 1)';
+          and created_at > date_sub(now(), interval ' . static::RETRIEVED_TIME . ' minute))';
 
         $sth = db()->prepare($sql);
         $sth->execute([

@@ -1,6 +1,6 @@
 @import "~purecss";
 
-[v-cloak] {
+[v-cloak], [hidden], .hidden {
   display: none;
 }
 

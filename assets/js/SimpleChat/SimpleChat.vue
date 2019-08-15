@@ -1,7 +1,14 @@
 <template>
     <div>
         <h1 class="title">Просто чат</h1>
-
+        <div class="clients">
+            <template v-if="users.length">
+                <span class="clients-client">{{ users }}</span>
+            </template>
+            <template v-else>
+                Ищу чуваков ...
+            </template>
+        </div>
         <div class="chat" ref="chat" @scroll="unshiftMessage">
             <p class="chat-message" v-for="message in messages" :key="message.id">
                 <small @click="insertName(message.name)">{{ message.name }}</small>
@@ -31,19 +38,21 @@
     data () {
       return {
         user: Auth.$data,
+        ws: null,
         messages: [],
+        clients: [],
         msg: '',
-        msg_id: 0,
         last_msg_id: 0,
         sHeight: 0,
-        timer: null,
         request: true,
         stop: false,
-        down: false
+        down: false,
+        timer: null
       };
     },
     created () {
-      this.fetch();
+      //this.fetch();
+      this.ws = this.socket();
     },
     mounted () {
       this.scrollDown();
@@ -61,29 +70,12 @@
         }
       });
     },
-    computed: {},
+    computed: {
+      users () {
+        return this.clients.map(n => n.first_name).join(', ');
+      }
+    },
     methods: {
-      fetch () {
-        get(`chat/all/${this.msg_id}`).then(({data}) => {
-          if (data.length) {
-            this.msg_id = data[0].id;
-
-            if (this.last_msg_id === 0) {
-              this.last_msg_id = data[data.length - 1].id;
-            }
-
-            data.reverse().forEach((el) => {
-              this.messages.push(el);
-            });
-
-            this.down = true;
-          }
-
-          this.timer = setTimeout(() => {
-            this.fetch();
-          }, 10000);
-        });
-      },
       unshiftMessage (e) {
         if (e.target.scrollTop === 0 && this.request) {
           this.request = false;
@@ -107,7 +99,6 @@
           this.timer = null;
           this.request = false;
           post('/chat/store', {message: this.msg, name: this.user.first_name}).then(() => {
-            this.fetch();
             this.request = true;
             this.msg = '';
           });
@@ -138,6 +129,47 @@
           this.msg += value;
           input.focus();
         }
+      },
+      socket () {
+        const ws = new WebSocket(`ws://${document.domain}/ws/chat`);
+        ws.onopen = this.pingPong;
+        ws.onmessage = this.socketHandler;
+        ws.onclose = () => console.info('WS close');
+        ws.error = () => console.error('WS error');
+        return ws;
+      },
+      pingPong () {
+        this.timer = setTimeout(() => {
+          this.ws.send('{"type": "ping"}');
+          this.pingPong();
+        }, 40000);
+      },
+      socketHandler (e) {
+        try {
+          const data = JSON.parse(e.data);
+          if (!('type' in data)) {
+            return;
+          }
+          switch (data['type']) {
+            case 'init':
+              post(`/chat/init/${data['data']['client_id']}`, null).then(({data}) => {
+                this.clients = data.users;
+                if (data['chat'].length) {
+                  this.last_msg_id = data['chat'][data['chat'].length - 1].id;
+
+                  data['chat'].reverse().forEach((el) => {
+                    this.messages.push(el);
+                  });
+
+                  this.down = true;
+                }
+              });
+              break;
+            case 'message':
+              break;
+          }
+
+        } catch (e) {}
       }
     },
     components: {
@@ -145,6 +177,7 @@
     },
     beforeRouteLeave (to, from, next) {
       clearTimeout(this.timer);
+      this.ws.close();
       next();
     }
   };
@@ -188,6 +221,15 @@
         input {
             width: 35rem;
             padding: 2px;
+        }
+    }
+
+    .clients {
+        margin-bottom: 10px;
+
+        &-client {
+            display: inline-block;
+            margin-right: 10px;
         }
     }
 </style>

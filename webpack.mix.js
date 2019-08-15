@@ -1,10 +1,18 @@
 const mix = require('laravel-mix');
 
-mix.js(`assets/js/app.js`, `public/js`);
-mix.sass(`assets/sass/app.scss`, `public/css`).options({processCssUrls: false});
+mix.js('assets/js/app.js', `${__dirname}/public/js`);
 
-mix.browserSync('wardex/');
-mix.disableNotifications();
+mix.sass('assets/sass/app.scss', `${__dirname}/public/css`).options({
+  processCssUrls: false,
+  autoprefixer: {
+    options: {
+      overrideBrowserslist: ['last 6 versions']
+    }
+  }
+});
+
+//mix.browserSync('wardex/');
+//mix.disableNotifications();
 
 // Full API
 // mix.js(src, output);

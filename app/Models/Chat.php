@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Crudch\Database\ActiveRecord;
 use Crudch\Database\Model;
 
 class Chat extends Model
 {
+    use ActiveRecord;
+
     protected static $table = 'chat';
 
     protected $fillable = [

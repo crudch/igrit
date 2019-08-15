@@ -26,7 +26,7 @@ return [
      */
     'db' => [
         'host'     => '127.0.0.1',
-        'dbname'   => 'wardex',
+        'dbname'   => 'igrit',
         'username' => 'root',
         'password' => '',
         'options'  => [

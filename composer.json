@@ -5,8 +5,11 @@
   "require": {
     "php": "^7.3",
     "ext-pdo": "*",
+    "ext-json": "*",
     "claviska/simpleimage": "^3.3",
-    "crudch/framework": "dev-master"
+    "crudch/framework": "dev-master",
+    "workerman/gateway-worker": "^3.0",
+    "workerman/gatewayclient": "^3.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"
