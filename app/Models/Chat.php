@@ -2,9 +2,19 @@
 
 namespace App\Models;
 
-use Crudch\Database\ActiveRecord;
 use Crudch\Database\Model;
+use Crudch\Date\CrutchDate;
+use Crudch\Database\ActiveRecord;
 
+/**
+ * Class Chat
+ *
+ * @package App\Models
+ *
+ * @property string name
+ * @property string message
+ * @property CrutchDate created_at
+ */
 class Chat extends Model
 {
     use ActiveRecord;

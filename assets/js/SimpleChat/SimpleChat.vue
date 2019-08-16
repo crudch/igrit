@@ -1,12 +1,12 @@
 <template>
     <div>
-        <h1 class="title">Просто чат</h1>
+        <h1 class="title">Points</h1>
         <div class="clients">
             <template v-if="users.length">
                 <span class="clients-client">{{ users }}</span>
             </template>
             <template v-else>
-                Ищу чуваков ...
+                Search Points ...
             </template>
         </div>
         <div class="chat" ref="chat" @scroll="unshiftMessage">
@@ -97,7 +97,7 @@
         if (this.msg.length && this.request) {
           this.timer = null;
           this.request = false;
-          post('/chat/store', {message: this.msg, name: this.user.first_name}).then(() => {
+          post('/chat/store', {message: this.msg}).then(() => {
             this.request = true;
             this.msg = '';
           });
@@ -171,6 +171,8 @@
               this.clients = this.clients.filter((n) => n.id !== data['data']['id']);
               break;
             case 'message':
+              this.down = true;
+              this.messages.push(data['data']);
               break;
           }
 
