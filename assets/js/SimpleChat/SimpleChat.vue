@@ -1,14 +1,14 @@
 <template>
     <div>
         <h1 class="title">Points</h1>
-        <div class="clients">
-            <template v-if="users.length">
-                <span class="clients-client">{{ users }}</span>
+        <ul class="clients">
+            <template v-if="clients.length">
+                <li v-for="client in clients" :class="{write: client.write}" :key="client.id">{{ client.first_name }}</li>
             </template>
             <template v-else>
-                Search Points ...
+                <li>Search Points...</li>
             </template>
-        </div>
+        </ul>
         <div class="chat" ref="chat" @scroll="unshiftMessage">
             <p class="chat-message" v-for="message in messages" :key="message.id">
                 <small @click="insertName(message.name)">{{ message.name }}</small>
@@ -33,6 +33,7 @@
   import Auth from '../auth';
   import { get, post } from '../api';
   import ChatMessage from '../Chat/ChatMessage';
+  import Login from '../Auth/Login';
 
   export default {
     data () {
@@ -42,13 +43,24 @@
         messages: [],
         clients: [],
         msg: '',
+        send: true,
         last_msg_id: 0,
         sHeight: 0,
         request: true,
         stop: false,
         down: false,
-        timer: null
+        timer: null,
+        timers: {}
       };
+    },
+    watch: {
+      msg (val) {
+        if (true === this.send && val.trim() !== '') {
+          this.send = !this.send;
+          this.ws.send('{"type": "write", "group": "chat"}');
+          setTimeout(() => {this.send = !this.send;}, 2000);
+        }
+      }
     },
     created () {
       this.ws = this.socket();
@@ -69,11 +81,7 @@
         }
       });
     },
-    computed: {
-      users () {
-        return this.clients.map(n => n.first_name).join(', ');
-      }
-    },
+    computed: {},
     methods: {
       unshiftMessage (e) {
         if (e.target.scrollTop === 0 && this.request) {
@@ -165,7 +173,7 @@
               });
               break;
             case 'join' :
-              this.clients.push({id: data['data']['id'], first_name: data['data']['first_name']});
+              this.clients.push({id: data['data']['id'], first_name: data['data']['first_name'], write: false});
               break;
             case 'leave' :
               this.clients = this.clients.filter((n) => n.id !== data['data']['id']);
@@ -173,6 +181,27 @@
             case 'message':
               this.down = true;
               this.messages.push(data['data']);
+
+              if (this.user.id !== data['user_id']) {
+                this.clients.forEach((client) => {
+                  if (client.id === data['user_id']) {
+                    return client.write = false;
+                  }
+                });
+              }
+              break;
+            case 'write':
+              const id = data['data']['id'];
+              if (id !== this.user.id) {
+                clearTimeout(this.timers[id]);
+
+                this.clients.forEach((client) => {
+                  if (client.id === id) {
+                    client.write = true;
+                    return this.timers[id] = setTimeout(() => {client.write = false;}, 5000);
+                  }
+                });
+              }
               break;
           }
 
@@ -232,11 +261,20 @@
     }
 
     .clients {
-        margin-bottom: 10px;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 10px;
+        font-size: 0;
 
-        &-client {
+        li {
+            font-size: 1rem;
             display: inline-block;
-            margin-right: 10px;
+            margin: 0 5px;
+
+            &.write {
+                background: url(/img/dots.svg) no-repeat bottom;
+                background-size: 70% 40%;
+            }
         }
     }
 </style>

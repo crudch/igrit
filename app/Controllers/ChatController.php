@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\Chat;
-use Crudch\Database\Exceptions\TransactionException;
 use GatewayClient\Gateway;
 use App\Requests\ChatRequest;
 use Crudch\Foundation\Controller;
@@ -33,7 +32,7 @@ class ChatController extends Controller
             Gateway::sendToGroup('chat', json_encode([
                 'type' => 'join',
                 'data' => $data,
-            ]));
+            ], JSON_UNESCAPED_UNICODE));
         }
 
         Gateway::joinGroup($client_id, 'chat');
@@ -44,6 +43,7 @@ class ChatController extends Controller
             $clients[$value['id']] = [
                 'id'         => $value['id'],
                 'first_name' => $value['first_name'],
+                'write' => false
             ];
         }
 
@@ -66,6 +66,7 @@ class ChatController extends Controller
         $message = Chat::create($request);
         Gateway::sendToGroup('chat', json_encode([
             'type' => 'message',
+            'user_id' => auth()->id,
             'data' => [
                 'id'         => $message->id,
                 'name'       => $message->name,

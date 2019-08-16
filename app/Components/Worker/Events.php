@@ -26,14 +26,19 @@ class Events
      */
     public static function onMessage($client_id, $message)
     {
-        /*$data = json_decode($message, true);
+        $data = json_decode($message, true);
 
-        if ($data['type'] === 'write') {
-            Gateway::sendToAll(json_encode([
-                'type' => 'write',
-            ]));
-        }*/
-        //Gateway::sendToAll('fuck');
+        switch ($data['type']) {
+            case 'write' : {
+                Gateway::sendToGroup($data['group'], json_encode([
+                    'type' => 'write',
+                    'data' => [
+                        'id' => (int)Gateway::getUidByClientId($client_id)
+                    ]
+                ]));
+                break;
+            }
+        }
     }
 
     /**
