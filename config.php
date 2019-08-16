@@ -9,12 +9,12 @@ return [
     /**
      * Имя приложения
      */
-    'domain' => 'wardex', // wardex.ru
+    'domain' => 'igrit',
 	
 	/**
      * Полный путь
      */
-    'url' => 'http://wardex',
+    'url' => 'http://igrit',
 	
     /**
      * Использовать HTTPS в куках
@@ -45,5 +45,5 @@ return [
     /**
      * Основной email
      */
-    'mail' => 'info@wardex.ru'
+    'mail' => 'info@igrit.ru'
 ];
