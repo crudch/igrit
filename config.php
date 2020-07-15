@@ -25,13 +25,13 @@ return [
      * Подключение к бд
      */
     'db'           => [
-        'driver' => 'sqlite',
+        'driver' => 'mysql',
 
         'mysql'  => [
             'host'     => '127.0.0.1',
             'database' => 'igrit',
             'username' => 'root',
-            'password' => '',
+            'password' => 'root',
             'charset'  => 'utf8mb4',
             'options'  => [
                 \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
