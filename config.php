@@ -4,37 +4,46 @@ return [
     /**
      * Окружение:  local | production
      */
-    'env' => 'local',
+    'env'          => 'local',
 
     /**
      * Имя приложения
      */
-    'domain' => 'igrit',
-	
-	/**
+    'domain'       => 'igrit',
+
+    /**
      * Полный путь
      */
-    'url' => 'http://igrit',
-	
+    'url'          => 'http://igrit',
+
     /**
      * Использовать HTTPS в куках
      */
-    'secure' => false,
+    'secure'       => false,
 
     /**
      * Подключение к бд
      */
-    'db' => [
-        'host'     => '127.0.0.1',
-        'dbname'   => 'igrit',
-        'username' => 'root',
-        'password' => '',
-        'options'  => [
-            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
-            //\PDO::ATTR_EMULATE_PREPARES  => false,
-            //\PDO::ATTR_STRINGIFY_FETCHES => false
-        ]
+    'db'           => [
+        'driver' => 'sqlite',
+
+        'mysql'  => [
+            'host'     => '127.0.0.1',
+            'database' => 'igrit',
+            'username' => 'root',
+            'password' => '',
+            'charset'  => 'utf8mb4',
+            'options'  => [
+                \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
+                //\PDO::ATTR_EMULATE_PREPARES  => false,
+                //\PDO::ATTR_STRINGIFY_FETCHES => false
+            ],
+        ],
+
+        'sqlite' => [
+            'database' => __DIR__ . '/database.sqlite',
+        ],
     ],
 
     /**
@@ -45,5 +54,5 @@ return [
     /**
      * Основной email
      */
-    'mail' => 'info@igrit.ru'
+    'mail'         => 'info@igrit.ru',
 ];
